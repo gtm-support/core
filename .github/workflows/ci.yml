@@ -40,7 +40,7 @@ jobs:
         run: yarn build
 
       - name: Test
-        run: yarn test
+        run: yarn test --ci --silent --reporters=default
 
   lint:
     runs-on: ubuntu-latest

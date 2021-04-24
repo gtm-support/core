@@ -85,7 +85,7 @@ module.exports = defineConfig({
       'warn',
       {
         minLength: 4,
-        skipWords: ['googletagmanager', 'jsdoc', 'noninteraction', 'nullish']
+        skipWords: ['googletagmanager', 'jsdoc', 'noninteraction', 'nullish', 'overridable']
       }
     ]
   },

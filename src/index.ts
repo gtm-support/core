@@ -105,9 +105,9 @@ export interface TrackEventOptions {
  */
 export class GtmSupport {
   /** GTM Container ID. */
-  protected readonly id: string | string[] | GtmIdContainer[];
+  public readonly id: string | string[] | GtmIdContainer[];
   /** GTM Support Options. */
-  protected readonly options: Omit<GtmSupportOptions, 'id'>;
+  public readonly options: Omit<GtmSupportOptions, 'id'>;
 
   /**
    * Constructs a new `GtmSupport` instance.
@@ -136,6 +136,9 @@ export class GtmSupport {
       compatibility: false,
       ...options
     };
+
+    // @ts-expect-error: Just remove the id from options
+    delete this.options.id;
   }
 
   /**
