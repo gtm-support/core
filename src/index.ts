@@ -1,3 +1,4 @@
+import { assertIsGtmId } from './assertIsGtmId';
 import { DataLayerObject } from './DataLayerObject';
 import { GtmIdContainer, GtmQueryParams } from './GtmContainer';
 import { GtmSupportOptions } from './options';
@@ -114,6 +115,18 @@ export class GtmSupport {
    * @param options Options.
    */
   public constructor(options: GtmSupportOptions) {
+    if (Array.isArray(options.id)) {
+      for (const idOrObject of options.id) {
+        if (typeof idOrObject === 'string') {
+          assertIsGtmId(idOrObject);
+        } else {
+          assertIsGtmId(idOrObject.id);
+        }
+      }
+    } else {
+      assertIsGtmId(options.id);
+    }
+
     this.id = options.id;
     this.options = {
       enabled: true,
