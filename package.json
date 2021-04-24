@@ -11,7 +11,10 @@
     "test": "jest"
   },
   "keywords": [
-    "gtm"
+    "gtm",
+    "google-tag-manager",
+    "googletagmanager",
+    "google"
   ],
   "author": {
     "name": "Christopher Quadflieg",
