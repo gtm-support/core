@@ -297,3 +297,8 @@ export class GtmSupport {
     }
   }
 }
+
+export { assertIsGtmId } from './assertIsGtmId';
+export { DataLayerObject } from './DataLayerObject';
+export { GtmIdContainer, GtmQueryParams } from './GtmContainer';
+export { GtmSupportOptions } from './options';
