@@ -7,7 +7,7 @@ export interface LoadScriptOptions {
   /**
    * Add url query string when load gtm.js with GTM ID.
    */
-  queryParams: GtmQueryParams;
+  queryParams?: GtmQueryParams;
   /**
    * Script can be set to `defer` to speed up page load at the cost of less accurate results (in case visitor leaves before script is loaded, which is unlikely but possible).
    */
@@ -21,7 +21,7 @@ export interface LoadScriptOptions {
    *
    * @see [Using Google Tag Manager with a Content Security Policy](https://developers.google.com/tag-manager/web/csp)
    */
-  nonce: string;
+  nonce?: string;
 }
 
 /**

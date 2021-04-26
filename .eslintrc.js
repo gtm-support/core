@@ -93,5 +93,13 @@ module.exports = defineConfig({
     jsdoc: {
       mode: 'typescript'
     }
-  }
+  },
+  overrides: [
+    {
+      files: ['tests/**/*.ts'],
+      rules: {
+        'jsdoc/require-jsdoc': 'off'
+      }
+    }
+  ]
 });
