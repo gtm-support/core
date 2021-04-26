@@ -98,6 +98,7 @@ module.exports = defineConfig({
     {
       files: ['tests/**/*.ts'],
       rules: {
+        '@typescript-eslint/unbound-method': 'off',
         'jsdoc/require-jsdoc': 'off'
       }
     }
