@@ -1,4 +1,4 @@
-import { loadScript } from '../src/index';
+import { hasScript, loadScript } from '../src/index';
 import { resetDataLayer, resetHtml } from './test-utils';
 
 describe('utils', () => {
@@ -147,6 +147,44 @@ describe('utils', () => {
         defer: false,
         nonce: ''
       });
+    });
+  });
+
+  describe('hasScript', () => {
+    afterEach(() => {
+      resetHtml();
+    });
+
+    test('true', () => {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtm.js';
+      document.body.appendChild(script);
+
+      expect(hasScript()).toBe(true);
+    });
+
+    test('false - no scripts', () => {
+      expect(hasScript()).toBe(false);
+    });
+
+    test('false - wrong script', () => {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = 'https://www.google-analytics.com/analytics.js';
+      document.body.appendChild(script);
+
+      expect(hasScript()).toBe(false);
+    });
+
+    test('true - multiple scripts', () => {
+      const wrongScript: HTMLScriptElement = document.createElement('script');
+      wrongScript.src = 'https://www.google-analytics.com/analytics.js';
+      document.body.appendChild(wrongScript);
+
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtm.js';
+      document.body.appendChild(script);
+
+      expect(hasScript()).toBe(true);
     });
   });
 });
