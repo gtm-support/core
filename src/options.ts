@@ -1,4 +1,4 @@
-import { GtmIdContainer, GtmQueryParams } from './gtm-container';
+import type { GtmIdContainer, GtmQueryParams } from './gtm-container';
 
 /**
  * Options passed to GTM Support.
