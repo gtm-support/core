@@ -30,6 +30,10 @@
   </a>
 </p>
 
+<p align="center">
+  This is the core implementation used by other packages like <a href="https://github.com/gtm-support/vue-gtm">vue-gtm</a> and <a href="https://github.com/gtm-support/vue-gtm/tree/vue2-gtm">vue2-gtm</a>
+</p>
+
 ## Credits
 
 - [mib200 vue-gtm](https://github.com/mib200/vue-gtm)
