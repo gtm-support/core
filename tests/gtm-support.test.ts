@@ -40,6 +40,25 @@ describe('gtm-support', () => {
     expect(instance.isInBrowserContext()).toBeFalsy();
   });
 
+  test('should expose mandatory functions', () => {
+    const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+
+    expect(instance.enable).toBeInstanceOf(Function);
+    expect(instance.enabled).toBeInstanceOf(Function);
+
+    expect(instance.debug).toBeInstanceOf(Function);
+    expect(instance.debugEnabled).toBeInstanceOf(Function);
+
+    expect(instance.dataLayer).toBeInstanceOf(Function);
+
+    expect(instance.trackView).toBeInstanceOf(Function);
+    expect(instance.trackEvent).toBeInstanceOf(Function);
+
+    expect(instance.isInBrowserContext).toBeInstanceOf(Function);
+    expect(instance.id).toBe('GTM-DEMO');
+    expect(instance.options).toBeInstanceOf(Object);
+  });
+
   describe('tracking', () => {
     afterEach(() => {
       resetHtml();
