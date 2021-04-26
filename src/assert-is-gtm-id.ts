@@ -1,4 +1,5 @@
-const GTM_ID_PATTERN: RegExp = /^GTM-[0-9A-Z]+$/;
+/** GTM Container ID pattern. */
+export const GTM_ID_PATTERN: RegExp = /^GTM-[0-9A-Z]+$/;
 
 /**
  * Assert that the given id is a valid GTM Container ID.
