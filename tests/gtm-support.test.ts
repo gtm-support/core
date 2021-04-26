@@ -1,6 +1,6 @@
 import { GtmSupport } from '../src/index';
 
-describe('index', () => {
+describe('gtm-support', () => {
   test('should apply default options', () => {
     const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
     expect(instance.options).toEqual({
