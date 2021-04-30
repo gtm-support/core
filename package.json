@@ -1,6 +1,6 @@
 {
   "name": "@gtm-support/core",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
