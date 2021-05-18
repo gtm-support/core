@@ -141,8 +141,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src:
-          'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
+        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
         async: true,
         defer: false,
         nonce: ''

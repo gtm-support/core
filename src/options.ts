@@ -58,7 +58,6 @@ export interface GtmSupportOptions {
    * Plugin can be disabled by setting this to `false`.
    *
    * @example enabled: !!GDPR_Cookie
-   *
    * @default true
    */
   enabled?: boolean;

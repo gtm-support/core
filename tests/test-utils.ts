@@ -1,5 +1,5 @@
 export function resetHtml(): void {
-  const html: HTMLHtmlElement = (document.getElementsByTagName('html')[0] as unknown) as HTMLHtmlElement;
+  const html: HTMLHtmlElement = document.getElementsByTagName('html')[0] as unknown as HTMLHtmlElement;
   html.innerHTML = '';
 }
 
