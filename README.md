@@ -34,6 +34,11 @@
   This is the core implementation used by other packages like <a href="https://github.com/gtm-support/vue-gtm">vue-gtm</a> and <a href="https://github.com/gtm-support/vue-gtm/tree/vue2-gtm">vue2-gtm</a>
 </p>
 
+## IE 11 support
+
+If you really need to support browsers like IE 11, you need to configure `transpileDependencies: ['@gtm-support/core']` in your `vue.config.js`.  
+See [#20 (comment)](https://github.com/gtm-support/core/issues/20#issuecomment-855903062)
+
 ## Credits
 
 - [mib200 vue-gtm](https://github.com/mib200/vue-gtm)
