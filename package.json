@@ -1,7 +1,7 @@
 {
   "name": "@gtm-support/core",
   "version": "1.0.0",
-  "description": "",
+  "description": "Core implementation for Google Tag Manager support",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rm -Rf coverage lib yarn.lock node_modules",
@@ -35,20 +35,20 @@
   ],
   "devDependencies": {
     "@types/jest": "~26.0.23",
-    "@types/node": "~15.12.2",
-    "@typescript-eslint/eslint-plugin": "~4.26.1",
-    "@typescript-eslint/parser": "~4.26.1",
-    "eslint": "~7.28.0",
+    "@types/node": "~16.0.0",
+    "@typescript-eslint/eslint-plugin": "~4.28.1",
+    "@typescript-eslint/parser": "~4.28.1",
+    "eslint": "~7.30.0",
     "eslint-config-prettier": "~8.3.0",
-    "eslint-define-config": "~1.0.8",
-    "eslint-plugin-jsdoc": "~35.1.3",
+    "eslint-define-config": "~1.0.9",
+    "eslint-plugin-jsdoc": "~35.4.1",
     "eslint-plugin-prettier": "~3.4.0",
-    "eslint-plugin-spellcheck": "~0.0.17",
-    "jest": "~27.0.4",
+    "eslint-plugin-spellcheck": "~0.0.19",
+    "jest": "~27.0.6",
     "np": "~7.5.0",
-    "prettier": "2.3.1",
-    "prettier-plugin-organize-imports": "~2.1.0",
+    "prettier": "2.3.2",
+    "prettier-plugin-organize-imports": "~2.2.0",
     "ts-jest": "~27.0.3",
-    "typescript": "~4.3.2"
+    "typescript": "~4.3.5"
   }
 }
