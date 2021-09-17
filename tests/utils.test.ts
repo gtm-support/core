@@ -162,11 +162,8 @@ describe('utils', () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
 
-      // Fake the script's onload call.
-      setTimeout(() => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        document.scripts.item(0)?.onload?.(null!);
-      }, 100);
+      // Fake the script's load event.
+      setTimeout(() => document.scripts.item(0)?.dispatchEvent(new Event('load')), 100);
 
       loadScript('GTM-DEMO', {
         compatibility: false,

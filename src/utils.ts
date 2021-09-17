@@ -55,9 +55,12 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
   const doc: Document = document;
   const script: HTMLScriptElement = doc.createElement('script');
 
-  script.onload = () => {
+  const scriptLoadListener: (event: Event) => void = (event) => {
     config.onReady?.({ id, script });
+    script.removeEventListener('load', scriptLoadListener);
   };
+
+  script.addEventListener('load', scriptLoadListener);
 
   window.dataLayer = window.dataLayer ?? [];
 
