@@ -1,6 +1,20 @@
 import type { GtmQueryParams } from './gtm-container';
 
 /**
+ *  OnReadyOptions.
+ */
+export interface OnReadyOptions {
+  /**
+   * The GTM id.
+   */
+  id: string;
+  /**
+   * The script element.
+   */
+  script: HTMLScriptElement;
+}
+
+/**
  * Options for `loadScript` function.
  */
 export interface LoadScriptOptions {
@@ -28,7 +42,7 @@ export interface LoadScriptOptions {
    * @param id GTM ID of the script.
    * @param script The script element.
    */
-  onReady?: (id: string, script: HTMLScriptElement) => void;
+  onReady?: (options: OnReadyOptions) => void;
 }
 
 /**
@@ -40,6 +54,10 @@ export interface LoadScriptOptions {
 export function loadScript(id: string, config: LoadScriptOptions): void {
   const doc: Document = document;
   const script: HTMLScriptElement = doc.createElement('script');
+
+  script.onload = () => {
+    config.onReady?.({ id, script });
+  };
 
   window.dataLayer = window.dataLayer ?? [];
 
@@ -66,8 +84,6 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
   });
   script.src = `https://www.googletagmanager.com/gtm.js?${queryString}`;
   doc.body.appendChild(script);
-
-  config.onReady?.(id, script);
 }
 
 /**
