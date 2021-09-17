@@ -22,6 +22,13 @@ export interface LoadScriptOptions {
    * @see [Using Google Tag Manager with a Content Security Policy](https://developers.google.com/tag-manager/web/csp)
    */
   nonce?: string;
+  /**
+   * Will be called when the script is loaded.
+   *
+   * @param id GTM ID of the script.
+   * @param script The script element.
+   */
+  onReady?: (id: string, script: HTMLScriptElement) => void;
 }
 
 /**
@@ -59,6 +66,8 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
   });
   script.src = `https://www.googletagmanager.com/gtm.js?${queryString}`;
   doc.body.appendChild(script);
+
+  config.onReady?.(id, script);
 }
 
 /**
