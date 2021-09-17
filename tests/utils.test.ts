@@ -149,6 +149,32 @@ describe('utils', () => {
     });
   });
 
+  // Test onReady
+  test(
+    JSON.stringify({
+      compatibility: false,
+      defer: false,
+      onReady: () => {
+        /* */
+      }
+    }),
+    (done) => {
+      expect(window.dataLayer).toBeUndefined();
+      expect(document.scripts.length).toBe(0);
+
+      loadScript('GTM-DEMO', {
+        compatibility: false,
+        defer: false,
+        onReady(id, script) {
+          expect(id).toBe('GTM-DEMO');
+          expect(script).toEqual(document.scripts.item(0));
+
+          done();
+        }
+      });
+    }
+  );
+
   describe('hasScript', () => {
     afterEach(() => {
       resetHtml();
