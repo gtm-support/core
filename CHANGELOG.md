@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.0.0...main)
+[diff](https://github.com/gtm-support/core/compare/1.1.0...main)
+
+# 1.1.0
+
+[diff](https://github.com/gtm-support/core/compare/1.0.0...1.1.0)
+
+- Add `onReady` function to config object. ([#77])
+
+[#77]: https://github.com/gtm-support/core/issues/77
 
 # 1.0.0
 
