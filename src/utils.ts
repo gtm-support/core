@@ -39,8 +39,7 @@ export interface LoadScriptOptions {
   /**
    * Will be called when the script is loaded.
    *
-   * @param id GTM ID of the script.
-   * @param script The script element.
+   * @param options Object containing container `id` and `script` element.
    */
   onReady?: (options: OnReadyOptions) => void;
 }
