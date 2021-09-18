@@ -1,6 +1,20 @@
 import type { GtmQueryParams } from './gtm-container';
 
 /**
+ *  OnReadyOptions.
+ */
+export interface OnReadyOptions {
+  /**
+   * The GTM id.
+   */
+  id: string;
+  /**
+   * The script element.
+   */
+  script: HTMLScriptElement;
+}
+
+/**
  * Options for `loadScript` function.
  */
 export interface LoadScriptOptions {
@@ -22,6 +36,12 @@ export interface LoadScriptOptions {
    * @see [Using Google Tag Manager with a Content Security Policy](https://developers.google.com/tag-manager/web/csp)
    */
   nonce?: string;
+  /**
+   * Will be called when the script is loaded.
+   *
+   * @param options Object containing container `id` and `script` element.
+   */
+  onReady?: (options: OnReadyOptions) => void;
 }
 
 /**
@@ -33,6 +53,13 @@ export interface LoadScriptOptions {
 export function loadScript(id: string, config: LoadScriptOptions): void {
   const doc: Document = document;
   const script: HTMLScriptElement = doc.createElement('script');
+
+  const scriptLoadListener: (event: Event) => void = (event) => {
+    config.onReady?.({ id, script });
+    script.removeEventListener('load', scriptLoadListener);
+  };
+
+  script.addEventListener('load', scriptLoadListener);
 
   window.dataLayer = window.dataLayer ?? [];
 
