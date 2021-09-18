@@ -19,4 +19,4 @@ export { GtmSupport } from './gtm-support';
 export type { TrackEventOptions } from './gtm-support';
 export type { GtmSupportOptions } from './options';
 export { hasScript, loadScript } from './utils';
-export type { LoadScriptOptions } from './utils';
+export type { LoadScriptOptions, OnReadyOptions } from './utils';
