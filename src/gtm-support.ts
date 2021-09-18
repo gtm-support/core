@@ -150,11 +150,12 @@ export class GtmSupport {
    * @param additionalEventData Additional data for the event object. `event`, `"content-name"` and `"content-view-name"` will always be overridden.
    */
   public trackView(screenName: string, path: string, additionalEventData: Record<string, any> = {}): void {
+    const trigger: boolean = this.isInBrowserContext() && (this.options.enabled ?? false);
     if (this.options.debug) {
-      console.log('[GTM-Support]: Dispatching TrackView', { screenName, path });
+      console.log(`[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching TrackView`, { screenName, path });
     }
 
-    if (this.isInBrowserContext() && this.options.enabled) {
+    if (trigger) {
       const dataLayer: DataLayerObject[] = (window.dataLayer = window.dataLayer ?? []);
       dataLayer.push({
         ...additionalEventData,
@@ -190,8 +191,9 @@ export class GtmSupport {
     noninteraction = false,
     ...rest
   }: TrackEventOptions = {}): void {
+    const trigger: boolean = this.isInBrowserContext() && (this.options.enabled ?? false);
     if (this.options.debug) {
-      console.log('[GTM-Support]: Dispatching event', {
+      console.log(`[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching event`, {
         event,
         category,
         action,
@@ -201,7 +203,7 @@ export class GtmSupport {
       });
     }
 
-    if (this.isInBrowserContext() && this.options.enabled) {
+    if (trigger) {
       const dataLayer: DataLayerObject[] = (window.dataLayer = window.dataLayer ?? []);
       dataLayer.push({
         event: event ?? 'interaction',
