@@ -147,36 +147,53 @@ describe('utils', () => {
         nonce: ''
       });
     });
-  });
 
-  // Test onReady
-  test(
-    JSON.stringify({
-      compatibility: false,
-      defer: false,
-      onReady: () => {
-        /* */
-      }
-    }),
-    (done) => {
+    // Test parentElement
+    test(JSON.stringify({ compatibility: false, defer: false, parentElement: document.head }), () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
-
-      // Fake the script's load event.
-      setTimeout(() => document.scripts.item(0)?.dispatchEvent(new Event('load')), 100);
 
       loadScript('GTM-DEMO', {
         compatibility: false,
         defer: false,
-        onReady({ id, script }) {
-          expect(id).toBe('GTM-DEMO');
-          expect(script).toEqual(document.scripts.item(0));
-
-          done();
-        }
+        parentElement: document.head
       });
-    }
-  );
+
+      expect(document.scripts.length).toBe(1);
+      expect(document.body.children.length).toBe(0);
+      expect(document.head.getElementsByTagName('script')[0]).toBeDefined();
+      expect(document.head.getElementsByTagName('script')[0]).toBe(document.scripts.item(0));
+    });
+
+    // Test onReady
+    test(
+      JSON.stringify({
+        compatibility: false,
+        defer: false,
+        onReady: () => {
+          /* */
+        }
+      }),
+      (done) => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
+
+        // Fake the script's load event.
+        setTimeout(() => document.scripts.item(0)?.dispatchEvent(new Event('load')), 100);
+
+        loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          onReady({ id, script }) {
+            expect(id).toBe('GTM-DEMO');
+            expect(script).toEqual(document.scripts.item(0));
+
+            done();
+          }
+        });
+      }
+    );
+  });
 
   describe('hasScript', () => {
     afterEach(() => {

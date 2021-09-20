@@ -37,6 +37,12 @@ export interface LoadScriptOptions {
    */
   nonce?: string;
   /**
+   * Where to append the script element.
+   *
+   * @default document.body
+   */
+  parentElement?: HTMLElement;
+  /**
    * Will be called when the script is loaded.
    *
    * @param options Object containing container `id` and `script` element.
@@ -85,7 +91,12 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
     ...(config.queryParams ?? {})
   });
   script.src = `https://www.googletagmanager.com/gtm.js?${queryString}`;
-  doc.body.appendChild(script);
+
+  const parentElement: HTMLElement = config.parentElement ?? doc.body;
+  if (typeof parentElement?.appendChild !== 'function') {
+    throw new Error('parentElement must be a DOM element');
+  }
+  parentElement.appendChild(script);
 }
 
 /**
