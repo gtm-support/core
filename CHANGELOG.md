@@ -6,8 +6,12 @@
 
 [diff](https://github.com/gtm-support/core/compare/1.0.0...1.1.0)
 
-- Add `onReady` function to config object. ([#77])
+- Log plugin is disabled on `trackView` and `trackEvent` call ([#50])
+- Support where `script` element can be appended ([#55])
+- Add `onReady` function to config object ([#77])
 
+[#50]: https://github.com/gtm-support/core/issues/50
+[#55]: https://github.com/gtm-support/core/issues/55
 [#77]: https://github.com/gtm-support/core/issues/77
 
 # 1.0.0
