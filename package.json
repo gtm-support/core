@@ -4,12 +4,12 @@
   "description": "Core implementation for Google Tag Manager support",
   "main": "lib/index.js",
   "scripts": {
-    "clean": "rm -Rf coverage lib yarn.lock node_modules",
+    "clean": "rm -Rf coverage lib pnpm-lock.yaml node_modules",
     "build": "tsc",
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "jest",
-    "prepublishOnly": "yarn clean && yarn install --cache-folder .yarn && yarn build"
+    "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build"
   },
   "keywords": [
     "gtm",
@@ -45,10 +45,10 @@
     "eslint-plugin-prettier": "~4.0.0",
     "eslint-plugin-spellcheck": "~0.0.19",
     "jest": "~27.3.1",
-    "np": "~7.5.0",
     "prettier": "2.4.1",
     "prettier-plugin-organize-imports": "~2.3.4",
     "ts-jest": "~27.0.7",
     "typescript": "~4.4.4"
-  }
+  },
+  "packageManager": "pnpm@6.22.1"
 }
