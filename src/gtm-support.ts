@@ -66,7 +66,7 @@ export class GtmSupport {
    *
    * @returns `true` if the script runs in browser context.
    */
-  public isInBrowserContext: () => boolean = () => typeof window !== 'undefined';
+  public isInBrowserContext: () => boolean = () => typeof window !== 'undefined' && typeof document !== 'undefined';
 
   /**
    * Check if plugin is enabled.
