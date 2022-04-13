@@ -55,6 +55,12 @@ export interface GtmSupportOptions {
    */
   nonce?: string;
   /**
+   * The URL of the script; useful for server-side GTM.
+   *
+   * @default https://www.googletagmanager.com/gtm.js
+   */
+  source?: string;
+  /**
    * Plugin can be disabled by setting this to `false`.
    *
    * @example enabled: !!GDPR_Cookie
