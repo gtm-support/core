@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { assertIsGtmId } from '../src/index';
 
 describe('assert-is-gtm-id', () => {

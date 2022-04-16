@@ -1,3 +1,4 @@
+import { afterEach, describe, expect, test } from 'vitest';
 import { hasScript, loadScript } from '../src/index';
 import { resetDataLayer, resetHtml } from './test-utils';
 

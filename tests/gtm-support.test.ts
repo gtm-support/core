@@ -1,3 +1,4 @@
+import { afterEach, describe, expect, test } from 'vitest';
 import { GtmSupport } from '../src/index';
 import { resetDataLayer, resetHtml } from './test-utils';
 
