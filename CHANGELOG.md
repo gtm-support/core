@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.1.0...main)
+[diff](https://github.com/gtm-support/core/compare/1.2.0...main)
+
+# 1.2.0
+
+[diff](https://github.com/gtm-support/core/compare/1.1.0...1.2.0)
+
+- Make script source configurable for server-side GTM ([#180])
+
+[#180]: https://github.com/gtm-support/core/pull/180
 
 # 1.1.0
 
