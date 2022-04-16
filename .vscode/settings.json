@@ -1,3 +1,16 @@
 {
-  "cSpell.words": ["devguide", "googletagmanager", "linebreak", "noninteraction", "overridable", "parens", "shinigami"]
+  "cSpell.words": [
+    "devguide",
+    "googletagmanager",
+    "linebreak",
+    "noninteraction",
+    "overridable",
+    "parens",
+    "shinigami"
+  ],
+  "eslint.validate": ["javascript", "typescript"],
+  "files.associations": {
+    "*.json5": "jsonc"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

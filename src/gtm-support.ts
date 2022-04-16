@@ -52,7 +52,7 @@ export class GtmSupport {
       loadScript: true,
       defer: false,
       compatibility: false,
-      ...options
+      ...options,
     };
 
     // @ts-expect-error: Just remove the id from options
@@ -66,7 +66,8 @@ export class GtmSupport {
    *
    * @returns `true` if the script runs in browser context.
    */
-  public isInBrowserContext: () => boolean = () => typeof window !== 'undefined';
+  public isInBrowserContext: () => boolean = () =>
+    typeof window !== 'undefined';
 
   /**
    * Check if plugin is enabled.
@@ -92,13 +93,21 @@ export class GtmSupport {
   public enable(enabled: boolean = true, source?: string): void {
     this.options.enabled = enabled;
 
-    if (this.isInBrowserContext() && enabled && !hasScript(source) && this.options.loadScript) {
+    if (
+      this.isInBrowserContext() &&
+      enabled &&
+      !hasScript(source) &&
+      this.options.loadScript
+    ) {
       if (Array.isArray(this.id)) {
         this.id.forEach((id: string | GtmIdContainer) => {
           if (typeof id === 'string') {
             loadScript(id, { ...this.options } as LoadScriptOptions);
           } else {
-            loadScript(id.id, { ...this.options, queryParams: id.queryParams } as LoadScriptOptions);
+            loadScript(id.id, {
+              ...this.options,
+              queryParams: id.queryParams,
+            } as LoadScriptOptions);
           }
         });
       } else {
@@ -150,19 +159,28 @@ export class GtmSupport {
    * @param path Path passed as `"content-name"`.
    * @param additionalEventData Additional data for the event object. `event`, `"content-name"` and `"content-view-name"` will always be overridden.
    */
-  public trackView(screenName: string, path: string, additionalEventData: Record<string, any> = {}): void {
-    const trigger: boolean = this.isInBrowserContext() && (this.options.enabled ?? false);
+  public trackView(
+    screenName: string,
+    path: string,
+    additionalEventData: Record<string, any> = {},
+  ): void {
+    const trigger: boolean =
+      this.isInBrowserContext() && (this.options.enabled ?? false);
     if (this.options.debug) {
-      console.log(`[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching TrackView`, { screenName, path });
+      console.log(
+        `[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching TrackView`,
+        { screenName, path },
+      );
     }
 
     if (trigger) {
-      const dataLayer: DataLayerObject[] = (window.dataLayer = window.dataLayer ?? []);
+      const dataLayer: DataLayerObject[] = (window.dataLayer =
+        window.dataLayer ?? []);
       dataLayer.push({
         ...additionalEventData,
         event: 'content-view',
         'content-name': path,
-        'content-view-name': screenName
+        'content-view-name': screenName,
       });
     }
   }
@@ -192,20 +210,25 @@ export class GtmSupport {
     noninteraction = false,
     ...rest
   }: TrackEventOptions = {}): void {
-    const trigger: boolean = this.isInBrowserContext() && (this.options.enabled ?? false);
+    const trigger: boolean =
+      this.isInBrowserContext() && (this.options.enabled ?? false);
     if (this.options.debug) {
-      console.log(`[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching event`, {
-        event,
-        category,
-        action,
-        label,
-        value,
-        ...rest
-      });
+      console.log(
+        `[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching event`,
+        {
+          event,
+          category,
+          action,
+          label,
+          value,
+          ...rest,
+        },
+      );
     }
 
     if (trigger) {
-      const dataLayer: DataLayerObject[] = (window.dataLayer = window.dataLayer ?? []);
+      const dataLayer: DataLayerObject[] = (window.dataLayer =
+        window.dataLayer ?? []);
       dataLayer.push({
         event: event ?? 'interaction',
         target: category,
@@ -213,7 +236,7 @@ export class GtmSupport {
         'target-properties': label,
         value: value,
         'interaction-type': noninteraction,
-        ...rest
+        ...rest,
       });
     }
   }

@@ -10,7 +10,7 @@ describe('gtm-support', () => {
         debug: false,
         loadScript: true,
         defer: false,
-        compatibility: false
+        compatibility: false,
       });
     });
 
@@ -20,12 +20,16 @@ describe('gtm-support', () => {
     });
 
     test('should apply id when passed as array', () => {
-      const instance: GtmSupport = new GtmSupport({ id: ['GTM-DEMO1', 'GTM-DEMO2'] });
+      const instance: GtmSupport = new GtmSupport({
+        id: ['GTM-DEMO1', 'GTM-DEMO2'],
+      });
       expect(instance.id).toEqual(['GTM-DEMO1', 'GTM-DEMO2']);
     });
 
     test('should apply id when passed as container array', () => {
-      const instance: GtmSupport = new GtmSupport({ id: [{ id: 'GTM-DEMO1' }, { id: 'GTM-DEMO2' }] });
+      const instance: GtmSupport = new GtmSupport({
+        id: [{ id: 'GTM-DEMO1' }, { id: 'GTM-DEMO2' }],
+      });
       expect(instance.id).toEqual([{ id: 'GTM-DEMO1' }, { id: 'GTM-DEMO2' }]);
     });
   });
@@ -77,9 +81,9 @@ describe('gtm-support', () => {
           expect.objectContaining({
             'content-name': 'Path',
             'content-view-name': 'ScreenName',
-            event: 'content-view'
-          })
-        ])
+            event: 'content-view',
+          }),
+        ]),
       );
     });
 
@@ -98,9 +102,9 @@ describe('gtm-support', () => {
             'interaction-type': false,
             target: null,
             'target-properties': null,
-            value: null
-          })
-        ])
+            value: null,
+          }),
+        ]),
       );
     });
   });

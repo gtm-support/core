@@ -1,4 +1,10 @@
-import { assertIsGtmId, GtmSupport, GTM_ID_PATTERN, hasScript, loadScript } from '../src/index';
+import {
+  assertIsGtmId,
+  GtmSupport,
+  GTM_ID_PATTERN,
+  hasScript,
+  loadScript,
+} from '../src/index';
 
 describe('index mandatory exports', () => {
   test('should export', () => {

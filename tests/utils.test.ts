@@ -9,17 +9,29 @@ describe('utils', () => {
         expect.arrayContaining([
           expect.objectContaining({
             event: 'gtm.js',
-            'gtm.start': expect.any(Number)
-          })
-        ])
+            'gtm.start': expect.any(Number),
+          }),
+        ]),
       );
     }
 
-    type ScriptChecks = { src: string; async: boolean; defer: boolean; nonce: string };
-    function expectScriptToBeCorrect({ src, async, defer, nonce }: ScriptChecks): void {
+    type ScriptChecks = {
+      src: string;
+      async: boolean;
+      defer: boolean;
+      nonce: string;
+    };
+    function expectScriptToBeCorrect({
+      src,
+      async,
+      defer,
+      nonce,
+    }: ScriptChecks): void {
       expect(document.scripts.length).toBe(1);
 
-      const script: HTMLScriptElement = document.scripts.item(0) as HTMLScriptElement;
+      const script: HTMLScriptElement = document.scripts.item(
+        0,
+      ) as HTMLScriptElement;
       expect(script).toBeDefined();
       expect(script.src).toBe(src);
       expect(script.async).toBe(async);
@@ -38,7 +50,7 @@ describe('utils', () => {
 
       loadScript('GTM-DEMO', {
         compatibility: false,
-        defer: false
+        defer: false,
       });
 
       expectDataLayerToBeCorrect();
@@ -46,7 +58,7 @@ describe('utils', () => {
         src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
         async: true,
         defer: false,
-        nonce: ''
+        nonce: '',
       });
     });
 
@@ -56,7 +68,7 @@ describe('utils', () => {
 
       loadScript('GTM-DEMO', {
         compatibility: true,
-        defer: false
+        defer: false,
       });
 
       expectDataLayerToBeCorrect();
@@ -64,7 +76,7 @@ describe('utils', () => {
         src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
         async: true,
         defer: true,
-        nonce: ''
+        nonce: '',
       });
     });
 
@@ -74,7 +86,7 @@ describe('utils', () => {
 
       loadScript('GTM-DEMO', {
         compatibility: false,
-        defer: true
+        defer: true,
       });
 
       expectDataLayerToBeCorrect();
@@ -82,7 +94,7 @@ describe('utils', () => {
         src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
         async: false,
         defer: true,
-        nonce: ''
+        nonce: '',
       });
     });
 
@@ -92,7 +104,7 @@ describe('utils', () => {
 
       loadScript('GTM-DEMO', {
         compatibility: true,
-        defer: true
+        defer: true,
       });
 
       expectDataLayerToBeCorrect();
@@ -100,90 +112,112 @@ describe('utils', () => {
         src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
         async: false,
         defer: true,
-        nonce: ''
+        nonce: '',
       });
     });
 
     // Test nonce
-    test(JSON.stringify({ compatibility: false, defer: false, nonce: 'test' }), () => {
-      expect(window.dataLayer).toBeUndefined();
-      expect(document.scripts.length).toBe(0);
+    test(
+      JSON.stringify({ compatibility: false, defer: false, nonce: 'test' }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
-        compatibility: false,
-        defer: false,
-        nonce: 'test'
-      });
+        loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          nonce: 'test',
+        });
 
-      expectDataLayerToBeCorrect();
-      expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
-        async: true,
-        defer: false,
-        nonce: 'test'
-      });
-    });
+        expectDataLayerToBeCorrect();
+        expectScriptToBeCorrect({
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          async: true,
+          defer: false,
+          nonce: 'test',
+        });
+      },
+    );
 
     // Test query
-    test(JSON.stringify({ compatibility: false, defer: false, queryParams: true }), () => {
-      expect(window.dataLayer).toBeUndefined();
-      expect(document.scripts.length).toBe(0);
+    test(
+      JSON.stringify({ compatibility: false, defer: false, queryParams: true }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
-        compatibility: false,
-        defer: false,
-        queryParams: {
-          gtm_auth: 'auth',
-          gtm_preview: 'preview',
-          gtm_cookies_win: 'cookies_win'
-        }
-      });
+        loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          queryParams: {
+            gtm_auth: 'auth',
+            gtm_preview: 'preview',
+            gtm_cookies_win: 'cookies_win',
+          },
+        });
 
-      expectDataLayerToBeCorrect();
-      expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
-        async: true,
-        defer: false,
-        nonce: ''
-      });
-    });
+        expectDataLayerToBeCorrect();
+        expectScriptToBeCorrect({
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
+          async: true,
+          defer: false,
+          nonce: '',
+        });
+      },
+    );
 
     // Test parentElement
-    test(JSON.stringify({ compatibility: false, defer: false, parentElement: document.head }), () => {
-      expect(window.dataLayer).toBeUndefined();
-      expect(document.scripts.length).toBe(0);
-
-      loadScript('GTM-DEMO', {
+    test(
+      JSON.stringify({
         compatibility: false,
         defer: false,
-        parentElement: document.head
-      });
+        parentElement: document.head,
+      }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
 
-      expect(document.scripts.length).toBe(1);
-      expect(document.body.children.length).toBe(0);
-      expect(document.head.getElementsByTagName('script')[0]).toBeDefined();
-      expect(document.head.getElementsByTagName('script')[0]).toBe(document.scripts.item(0));
-    });
+        loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          parentElement: document.head,
+        });
+
+        expect(document.scripts.length).toBe(1);
+        expect(document.body.children.length).toBe(0);
+        expect(document.head.getElementsByTagName('script')[0]).toBeDefined();
+        expect(document.head.getElementsByTagName('script')[0]).toBe(
+          document.scripts.item(0),
+        );
+      },
+    );
 
     // Test source
-    test(JSON.stringify({ compatibility: false, defer: false, source: 'https://analytics.example.com/gtm.js' }), () => {
-      expect(window.dataLayer).toBeUndefined();
-      expect(document.scripts.length).toBe(0);
-
-      loadScript('GTM-DEMO', {
+    test(
+      JSON.stringify({
         compatibility: false,
         defer: false,
-        source: 'https://analytics.example.com/gtm.js'
-      });
+        source: 'https://analytics.example.com/gtm.js',
+      }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
 
-      expectDataLayerToBeCorrect();
-      expectScriptToBeCorrect({
-        src: 'https://analytics.example.com/gtm.js?id=GTM-DEMO',
-        async: true,
-        defer: false,
-        nonce: ''
-      });
-    });
+        loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          source: 'https://analytics.example.com/gtm.js',
+        });
+
+        expectDataLayerToBeCorrect();
+        expectScriptToBeCorrect({
+          src: 'https://analytics.example.com/gtm.js?id=GTM-DEMO',
+          async: true,
+          defer: false,
+          nonce: '',
+        });
+      },
+    );
 
     // Test onReady
     test(
@@ -192,14 +226,17 @@ describe('utils', () => {
         defer: false,
         onReady: () => {
           /* */
-        }
+        },
       }),
       (done) => {
         expect(window.dataLayer).toBeUndefined();
         expect(document.scripts.length).toBe(0);
 
         // Fake the script's load event.
-        setTimeout(() => document.scripts.item(0)?.dispatchEvent(new Event('load')), 100);
+        setTimeout(
+          () => document.scripts.item(0)?.dispatchEvent(new Event('load')),
+          100,
+        );
 
         loadScript('GTM-DEMO', {
           compatibility: false,
@@ -209,9 +246,9 @@ describe('utils', () => {
             expect(script).toEqual(document.scripts.item(0));
 
             done();
-          }
+          },
         });
-      }
+      },
     );
   });
 

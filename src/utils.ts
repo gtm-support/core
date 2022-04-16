@@ -77,7 +77,7 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
 
   window.dataLayer?.push({
     event: 'gtm.js',
-    'gtm.start': new Date().getTime()
+    'gtm.start': new Date().getTime(),
   });
 
   if (!id) {
@@ -94,10 +94,11 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
 
   const queryString: URLSearchParams = new URLSearchParams({
     id,
-    ...(config.queryParams ?? {})
+    ...(config.queryParams ?? {}),
   });
 
-  const source: string = config.source ?? 'https://www.googletagmanager.com/gtm.js';
+  const source: string =
+    config.source ?? 'https://www.googletagmanager.com/gtm.js';
 
   script.src = `${source}?${queryString}`;
 
@@ -116,6 +117,10 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
  * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
  * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtm.js'` (or `source` if specified), otherwise `false`.
  */
-export function hasScript(source: string = 'https://www.googletagmanager.com/gtm.js'): boolean {
-  return Array.from(document.getElementsByTagName('script')).some((script) => script.src.includes(source));
+export function hasScript(
+  source: string = 'https://www.googletagmanager.com/gtm.js',
+): boolean {
+  return Array.from(document.getElementsByTagName('script')).some((script) =>
+    script.src.includes(source),
+  );
 }

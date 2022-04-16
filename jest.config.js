@@ -6,5 +6,5 @@ module.exports = {
   reporters: ['default'],
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts'],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
 };
