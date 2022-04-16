@@ -114,7 +114,7 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
  * Check if GTM script is in the document.
  *
  * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
- * @returns `true` if in the `document` is a `script` with `src` containing "https://www.googletagmanager.com/gtm.js" (or `source` if specified), otherwise `false`.
+ * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtm.js'` (or `source` if specified), otherwise `false`.
  */
 export function hasScript(source: string = 'https://www.googletagmanager.com/gtm.js'): boolean {
   return Array.from(document.getElementsByTagName('script')).some((script) => script.src.includes(source));
