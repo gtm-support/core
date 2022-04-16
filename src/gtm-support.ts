@@ -87,11 +87,12 @@ export class GtmSupport {
    * - the `loadScript` option is set to `true`
    *
    * @param enabled `true` to enable, `false` to disable. Default: `true`.
+   * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
    */
-  public enable(enabled: boolean = true): void {
+  public enable(enabled: boolean = true, source?: string): void {
     this.options.enabled = enabled;
 
-    if (this.isInBrowserContext() && enabled && !hasScript() && this.options.loadScript) {
+    if (this.isInBrowserContext() && enabled && !hasScript(source) && this.options.loadScript) {
       if (Array.isArray(this.id)) {
         this.id.forEach((id: string | GtmIdContainer) => {
           if (typeof id === 'string') {

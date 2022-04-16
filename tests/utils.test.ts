@@ -165,6 +165,26 @@ describe('utils', () => {
       expect(document.head.getElementsByTagName('script')[0]).toBe(document.scripts.item(0));
     });
 
+    // Test source
+    test(JSON.stringify({ compatibility: false, defer: false, source: 'https://analytics.example.com/gtm.js' }), () => {
+      expect(window.dataLayer).toBeUndefined();
+      expect(document.scripts.length).toBe(0);
+
+      loadScript('GTM-DEMO', {
+        compatibility: false,
+        defer: false,
+        source: 'https://analytics.example.com/gtm.js'
+      });
+
+      expectDataLayerToBeCorrect();
+      expectScriptToBeCorrect({
+        src: 'https://analytics.example.com/gtm.js?id=GTM-DEMO',
+        async: true,
+        defer: false,
+        nonce: ''
+      });
+    });
+
     // Test onReady
     test(
       JSON.stringify({
@@ -218,6 +238,14 @@ describe('utils', () => {
       document.body.appendChild(script);
 
       expect(hasScript()).toBe(false);
+    });
+
+    test('true - custom script', () => {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = 'https://analytics.example.com/gtm.js';
+      document.body.appendChild(script);
+
+      expect(hasScript('https://analytics.example.com/gtm.js')).toBe(true);
     });
 
     test('true - multiple scripts', () => {

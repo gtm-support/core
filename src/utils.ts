@@ -43,6 +43,12 @@ export interface LoadScriptOptions {
    */
   parentElement?: HTMLElement;
   /**
+   * The URL of the script; useful for server-side GTM.
+   *
+   * @default https://www.googletagmanager.com/gtm.js
+   */
+  source?: string;
+  /**
    * Will be called when the script is loaded.
    *
    * @param options Object containing container `id` and `script` element.
@@ -90,22 +96,26 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
     id,
     ...(config.queryParams ?? {})
   });
-  script.src = `https://www.googletagmanager.com/gtm.js?${queryString}`;
+
+  const source: string = config.source ?? 'https://www.googletagmanager.com/gtm.js';
+
+  script.src = `${source}?${queryString}`;
 
   const parentElement: HTMLElement = config.parentElement ?? doc.body;
+
   if (typeof parentElement?.appendChild !== 'function') {
     throw new Error('parentElement must be a DOM element');
   }
+
   parentElement.appendChild(script);
 }
 
 /**
  * Check if GTM script is in the document.
  *
- * @returns `true` if in the `document` is a `script` with `src` containing `googletagmanager.com/gtm.js`, otherwise `false`.
+ * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
+ * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtm.js'` (or `source` if specified), otherwise `false`.
  */
-export function hasScript(): boolean {
-  return Array.from(document.getElementsByTagName('script')).some((script) =>
-    script.src.includes('googletagmanager.com/gtm.js')
-  );
+export function hasScript(source: string = 'https://www.googletagmanager.com/gtm.js'): boolean {
+  return Array.from(document.getElementsByTagName('script')).some((script) => script.src.includes(source));
 }
