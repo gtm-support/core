@@ -49,7 +49,7 @@ describe('utils', () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
+      const script: HTMLScriptElement = loadScript('GTM-DEMO', {
         compatibility: false,
         defer: false,
       });
@@ -61,13 +61,14 @@ describe('utils', () => {
         defer: false,
         nonce: '',
       });
+      expect(script).toBe(document.scripts.item(0));
     });
 
     test(JSON.stringify({ compatibility: true, defer: false }), () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
+      const script: HTMLScriptElement = loadScript('GTM-DEMO', {
         compatibility: true,
         defer: false,
       });
@@ -79,13 +80,14 @@ describe('utils', () => {
         defer: true,
         nonce: '',
       });
+      expect(script).toBe(document.scripts.item(0));
     });
 
     test(JSON.stringify({ compatibility: false, defer: true }), () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
+      const script: HTMLScriptElement = loadScript('GTM-DEMO', {
         compatibility: false,
         defer: true,
       });
@@ -97,13 +99,14 @@ describe('utils', () => {
         defer: true,
         nonce: '',
       });
+      expect(script).toBe(document.scripts.item(0));
     });
 
     test(JSON.stringify({ compatibility: true, defer: true }), () => {
       expect(window.dataLayer).toBeUndefined();
       expect(document.scripts.length).toBe(0);
 
-      loadScript('GTM-DEMO', {
+      const script: HTMLScriptElement = loadScript('GTM-DEMO', {
         compatibility: true,
         defer: true,
       });
@@ -115,6 +118,7 @@ describe('utils', () => {
         defer: true,
         nonce: '',
       });
+      expect(script).toBe(document.scripts.item(0));
     });
 
     // Test nonce
@@ -124,7 +128,7 @@ describe('utils', () => {
         expect(window.dataLayer).toBeUndefined();
         expect(document.scripts.length).toBe(0);
 
-        loadScript('GTM-DEMO', {
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
           compatibility: false,
           defer: false,
           nonce: 'test',
@@ -137,6 +141,7 @@ describe('utils', () => {
           defer: false,
           nonce: 'test',
         });
+        expect(script).toBe(document.scripts.item(0));
       },
     );
 
@@ -147,7 +152,7 @@ describe('utils', () => {
         expect(window.dataLayer).toBeUndefined();
         expect(document.scripts.length).toBe(0);
 
-        loadScript('GTM-DEMO', {
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
           compatibility: false,
           defer: false,
           queryParams: {
@@ -164,6 +169,7 @@ describe('utils', () => {
           defer: false,
           nonce: '',
         });
+        expect(script).toBe(document.scripts.item(0));
       },
     );
 
@@ -178,7 +184,7 @@ describe('utils', () => {
         expect(window.dataLayer).toBeUndefined();
         expect(document.scripts.length).toBe(0);
 
-        loadScript('GTM-DEMO', {
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
           compatibility: false,
           defer: false,
           parentElement: document.head,
@@ -190,6 +196,7 @@ describe('utils', () => {
         expect(document.head.getElementsByTagName('script')[0]).toBe(
           document.scripts.item(0),
         );
+        expect(script).toBe(document.scripts.item(0));
       },
     );
 
@@ -204,7 +211,7 @@ describe('utils', () => {
         expect(window.dataLayer).toBeUndefined();
         expect(document.scripts.length).toBe(0);
 
-        loadScript('GTM-DEMO', {
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
           compatibility: false,
           defer: false,
           source: 'https://analytics.example.com/gtm.js',
@@ -217,6 +224,7 @@ describe('utils', () => {
           defer: false,
           nonce: '',
         });
+        expect(script).toBe(document.scripts.item(0));
       },
     );
 
@@ -240,7 +248,7 @@ describe('utils', () => {
             100,
           );
 
-          loadScript('GTM-DEMO', {
+          const script: HTMLScriptElement = loadScript('GTM-DEMO', {
             compatibility: false,
             defer: false,
             onReady({ id, script }) {
@@ -250,6 +258,7 @@ describe('utils', () => {
               resolve();
             },
           });
+          expect(script).toBe(document.scripts.item(0));
         });
       },
     );

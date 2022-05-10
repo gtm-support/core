@@ -62,6 +62,8 @@ describe('gtm-support', () => {
     expect(instance.isInBrowserContext).toBeInstanceOf(Function);
     expect(instance.id).toBe('GTM-DEMO');
     expect(instance.options).toBeInstanceOf(Object);
+
+    expect(instance.scriptElements).toBeInstanceOf(Array);
   });
 
   describe('tracking', () => {
