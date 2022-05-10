@@ -229,25 +229,27 @@ describe('utils', () => {
           /* */
         },
       }),
-      (done) => {
-        expect(window.dataLayer).toBeUndefined();
-        expect(document.scripts.length).toBe(0);
+      () => {
+        return new Promise((resolve) => {
+          expect(window.dataLayer).toBeUndefined();
+          expect(document.scripts.length).toBe(0);
 
-        // Fake the script's load event.
-        setTimeout(
-          () => document.scripts.item(0)?.dispatchEvent(new Event('load')),
-          100,
-        );
+          // Fake the script's load event.
+          setTimeout(
+            () => document.scripts.item(0)?.dispatchEvent(new Event('load')),
+            100,
+          );
 
-        loadScript('GTM-DEMO', {
-          compatibility: false,
-          defer: false,
-          onReady({ id, script }) {
-            expect(id).toBe('GTM-DEMO');
-            expect(script).toEqual(document.scripts.item(0));
+          loadScript('GTM-DEMO', {
+            compatibility: false,
+            defer: false,
+            onReady({ id, script }) {
+              expect(id).toBe('GTM-DEMO');
+              expect(script).toEqual(document.scripts.item(0));
 
-            done();
-          },
+              resolve();
+            },
+          });
         });
       },
     );
