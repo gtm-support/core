@@ -27,6 +27,8 @@ export class GtmSupport {
   /** GTM Support Options. */
   public readonly options: Omit<GtmSupportOptions, 'id'>;
 
+  public readonly scriptElements: HTMLScriptElement[] = [];
+
   /**
    * Constructs a new `GtmSupport` instance.
    *
@@ -101,17 +103,24 @@ export class GtmSupport {
     ) {
       if (Array.isArray(this.id)) {
         this.id.forEach((id: string | GtmIdContainer) => {
+          let scriptElement: HTMLScriptElement;
           if (typeof id === 'string') {
-            loadScript(id, { ...this.options } as LoadScriptOptions);
+            scriptElement = loadScript(id, {
+              ...this.options,
+            } as LoadScriptOptions);
           } else {
-            loadScript(id.id, {
+            scriptElement = loadScript(id.id, {
               ...this.options,
               queryParams: id.queryParams,
             } as LoadScriptOptions);
           }
+          this.scriptElements.push(scriptElement);
         });
       } else {
-        loadScript(this.id, { ...this.options } as LoadScriptOptions);
+        const scriptElement: HTMLScriptElement = loadScript(this.id, {
+          ...this.options,
+        } as LoadScriptOptions);
+        this.scriptElements.push(scriptElement);
       }
     }
   }
