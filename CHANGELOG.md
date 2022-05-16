@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.2.0...main)
+[diff](https://github.com/gtm-support/core/compare/1.3.0...main)
+
+# 1.3.0
+
+[diff](https://github.com/gtm-support/core/compare/1.2.0...1.3.0)
+
+- Make script accessible([#186])
+
+[#186]: https://github.com/gtm-support/core/issues/186
 
 # 1.2.0
 
