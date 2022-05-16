@@ -62,6 +62,8 @@ describe('gtm-support', () => {
     expect(instance.isInBrowserContext).toBeInstanceOf(Function);
     expect(instance.id).toBe('GTM-DEMO');
     expect(instance.options).toBeInstanceOf(Object);
+
+    expect(instance.scriptElements).toBeInstanceOf(Array);
   });
 
   describe('tracking', () => {
@@ -107,6 +109,43 @@ describe('gtm-support', () => {
           }),
         ]),
       );
+    });
+  });
+
+  describe('update script', () => {
+    afterEach(() => {
+      resetHtml();
+      resetDataLayer();
+    });
+
+    test('should update script', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        loadScript: true,
+      });
+
+      expect(instance.scriptElements).toEqual([]);
+
+      instance.enable();
+
+      expect(instance.scriptElements).toHaveLength(1);
+
+      const scriptElement: HTMLScriptElement = instance.scriptElements[0];
+
+      expect(scriptElement.src).toEqual(
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+      );
+
+      // https://github.com/gtm-support/core/issues/186
+      expect(scriptElement.getAttributeNode('data-ot-ignore')).toBeNull();
+      scriptElement.setAttributeNode(
+        document.createAttribute('data-ot-ignore'),
+      );
+      expect(scriptElement.getAttributeNode('data-ot-ignore')).toBeDefined();
+
+      expect(scriptElement.getAttribute('class')).toBeNull();
+      scriptElement.setAttribute('class', 'category-C0001');
+      expect(scriptElement.getAttribute('class')).toBe('category-C0001');
     });
   });
 });

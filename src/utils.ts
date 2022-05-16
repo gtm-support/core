@@ -61,8 +61,12 @@ export interface LoadScriptOptions {
  *
  * @param id GTM ID.
  * @param config The config object.
+ * @returns The script element.
  */
-export function loadScript(id: string, config: LoadScriptOptions): void {
+export function loadScript(
+  id: string,
+  config: LoadScriptOptions,
+): HTMLScriptElement {
   const doc: Document = document;
   const script: HTMLScriptElement = doc.createElement('script');
 
@@ -81,7 +85,7 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
   });
 
   if (!id) {
-    return;
+    return script;
   }
 
   script.async = !config.defer;
@@ -109,6 +113,8 @@ export function loadScript(id: string, config: LoadScriptOptions): void {
   }
 
   parentElement.appendChild(script);
+
+  return script;
 }
 
 /**
