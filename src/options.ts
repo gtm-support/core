@@ -77,4 +77,11 @@ export interface GtmSupportOptions {
    * Helpful if you are including GTM manually, but need the dataLayer functionality in your components.
    */
   loadScript?: boolean;
+
+  /**
+   * The name of trackView event
+   *
+   * @default 'content-view'
+   */
+  trackViewEvent?: string;
 }
