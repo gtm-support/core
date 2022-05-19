@@ -83,5 +83,5 @@ export interface GtmSupportOptions {
    *
    * @default 'content-view'
    */
-  trackViewEvent?: string;
+  trackViewEventProperty?: string;
 }
