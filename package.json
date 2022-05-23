@@ -1,6 +1,6 @@
 {
   "name": "@gtm-support/core",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Core implementation for Google Tag Manager support",
   "main": "lib/index.js",
   "scripts": {
