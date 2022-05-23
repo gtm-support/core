@@ -187,7 +187,7 @@ export class GtmSupport {
         window.dataLayer ?? []);
       dataLayer.push({
         ...additionalEventData,
-        event: 'content-view',
+        event: this.options.trackViewEventProperty ?? 'content-view',
         'content-name': path,
         'content-view-name': screenName,
       });

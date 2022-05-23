@@ -73,7 +73,10 @@ describe('gtm-support', () => {
     });
 
     test('should expose trackView function', () => {
-      const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        trackViewEventProperty: 'track-view-event-demo',
+      });
 
       expect(instance.trackView).toBeInstanceOf(Function);
 
@@ -84,7 +87,7 @@ describe('gtm-support', () => {
           expect.objectContaining({
             'content-name': 'Path',
             'content-view-name': 'ScreenName',
-            event: 'content-view',
+            event: 'track-view-event-demo',
           }),
         ]),
       );
