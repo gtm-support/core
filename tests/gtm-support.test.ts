@@ -73,6 +73,24 @@ describe('gtm-support', () => {
     });
 
     test('should expose trackView function', () => {
+      const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+
+      expect(instance.trackView).toBeInstanceOf(Function);
+
+      instance.trackView('ScreenName', 'Path');
+
+      expect(window.dataLayer).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            'content-name': 'Path',
+            'content-view-name': 'ScreenName',
+            event: 'content-view',
+          }),
+        ]),
+      );
+    });
+
+    test('should override trackView event property', () => {
       const instance: GtmSupport = new GtmSupport({
         id: 'GTM-DEMO',
         trackViewEventProperty: 'track-view-event-demo',
