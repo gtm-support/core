@@ -168,5 +168,21 @@ describe('gtm-support', () => {
       scriptElement.setAttribute('class', 'category-C0001');
       expect(scriptElement.getAttribute('class')).toBe('category-C0001');
     });
+
+    test('should generate multiple scripts with multiple ids', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: ['GTM-DEMO1', 'GTM-DEMO2'],
+      });
+
+      instance.enable();
+
+      expect(instance.scriptElements).toHaveLength(2);
+      expect(instance.scriptElements[0].src).toEqual(
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO1',
+      );
+      expect(instance.scriptElements[1].src).toEqual(
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO2',
+      );
+    });
   });
 });

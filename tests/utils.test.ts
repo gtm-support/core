@@ -238,7 +238,7 @@ describe('utils', () => {
         },
       }),
       () => {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
           expect(window.dataLayer).toBeUndefined();
           expect(document.scripts.length).toBe(0);
 
