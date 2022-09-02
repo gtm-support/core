@@ -39,7 +39,7 @@
     "@typescript-eslint/parser": "~5.31.0",
     "eslint": "~8.20.0",
     "eslint-config-prettier": "~8.5.0",
-    "eslint-define-config": "~1.5.1",
+    "eslint-define-config": "~1.7.0",
     "eslint-gitignore": "~0.1.0",
     "eslint-plugin-jsdoc": "~39.3.4",
     "eslint-plugin-prettier": "~4.2.1",
