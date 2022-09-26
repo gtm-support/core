@@ -9,7 +9,7 @@ export const GTM_ID_PATTERN: RegExp = /^GTM-[0-9A-Z]+$/;
  * @param id A GTM Container ID.
  */
 export function assertIsGtmId(id: string): asserts id {
-  if (typeof id !== 'string' || !GTM_ID_PATTERN.exec(id)) {
+  if (typeof id !== 'string' || !GTM_ID_PATTERN.test(id)) {
     const suggestion: string = String(id)
       .toUpperCase()
       .replace(/.*-|[^0-9A-Z]/g, '');
