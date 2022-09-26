@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.4.1...main)
+[diff](https://github.com/gtm-support/core/compare/1.4.2...main)
+
+# 1.4.2
+
+[diff](https://github.com/gtm-support/core/compare/1.4.1...1.4.2)
+
+- Improve GTM-ID assertion error ([34d4eda])
+
+[34d4eda]: https://github.com/gtm-support/core/commit/34d4eda7e376e82ffc744f24508959cd33aada84
 
 # 1.4.1
 
