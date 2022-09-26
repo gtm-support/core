@@ -1,6 +1,12 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.4.0...main)
+[diff](https://github.com/gtm-support/core/compare/1.4.1...main)
+
+# 1.4.1
+
+[diff](https://github.com/gtm-support/core/compare/1.4.0...1.4.1)
+
+- No additional changes, just dev dependency updates and sync for vue-gtm
 
 # 1.4.0
 
