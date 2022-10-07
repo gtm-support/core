@@ -10,7 +10,18 @@
   },
   "plugins": {
     "@release-it/keep-a-changelog": {
-      "addVersionUrl": true
+      "filename": "CHANGELOG.md",
+      "strictLatest": true,
+      "addUnreleased": true,
+      "keepUnreleased": true,
+      "addVersionUrl": true,
+      "versionUrlFormats": {
+        "repositoryUrl": "https://github.com/gtm-support/core",
+        "unreleasedUrl": "{repositoryUrl}/compare/{tagName}...{head}",
+        "versionUrl": "{repositoryUrl}/compare/{previousTag}...{tagName}",
+        "firstVersionUrl": "{repositoryUrl}/releases/tag/{tagName}"
+      },
+      "head": "main"
     }
   },
   "git": {
