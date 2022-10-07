@@ -34,7 +34,7 @@
     "tsconfig.json"
   ],
   "devDependencies": {
-    "@types/node": "~18.7.21",
+    "@types/node": "~18.8.3",
     "@typescript-eslint/eslint-plugin": "~5.38.0",
     "@typescript-eslint/parser": "~5.38.0",
     "eslint": "~8.24.0",
