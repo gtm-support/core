@@ -1,6 +1,12 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/1.4.2...main)
+[diff](https://github.com/gtm-support/core/compare/2.0.0...main)
+
+# 2.0.0
+
+[diff](https://github.com/gtm-support/core/compare/1.4.2...2.0.0)
+
+- Now serving ESM and CJS
 
 # 1.4.2
 
