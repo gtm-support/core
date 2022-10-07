@@ -1,6 +1,6 @@
 {
   "name": "@gtm-support/core",
-  "version": "1.4.2",
+  "version": "2.0.0-beta.1",
   "description": "Core implementation for Google Tag Manager support",
   "scripts": {
     "clean": "rimraf coverage lib pnpm-lock.yaml node_modules",
