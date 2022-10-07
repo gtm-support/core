@@ -11,9 +11,9 @@
   "plugins": {
     "@release-it/keep-a-changelog": {
       "filename": "CHANGELOG.md",
-      "strictLatest": true,
-      "addUnreleased": true,
-      "keepUnreleased": true,
+      "strictLatest": false,
+      "addUnreleased": false,
+      "keepUnreleased": false,
       "addVersionUrl": true,
       "versionUrlFormats": {
         "repositoryUrl": "https://github.com/gtm-support/core",
