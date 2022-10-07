@@ -4,7 +4,7 @@
   "description": "Core implementation for Google Tag Manager support",
   "scripts": {
     "clean": "rimraf coverage lib pnpm-lock.yaml node_modules",
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "vitest",
