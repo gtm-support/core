@@ -5,7 +5,7 @@ const { readGitignoreFiles } = require('eslint-gitignore');
 module.exports = defineConfig({
   ignorePatterns: [
     ...readGitignoreFiles(),
-    '.eslintrc.js', // Skip self linting
+    '.eslintrc.cjs', // Skip self linting
   ],
   root: true,
   env: {
@@ -104,9 +104,12 @@ module.exports = defineConfig({
           'googletagmanager',
           'jsdoc',
           'jsdom',
+          'minify',
           'noninteraction',
           'nullish',
           'overridable',
+          'vite',
+          'vitest',
         ],
       },
     ],

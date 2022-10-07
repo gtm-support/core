@@ -2,14 +2,26 @@
   "name": "@gtm-support/core",
   "version": "1.4.2",
   "description": "Core implementation for Google Tag Manager support",
-  "main": "lib/index.js",
   "scripts": {
-    "clean": "rm -Rf coverage lib pnpm-lock.yaml node_modules",
-    "build": "tsc",
+    "clean": "rimraf coverage lib pnpm-lock.yaml node_modules",
+    "build": "tsc --noEmit && vite build",
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "vitest",
     "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build"
+  },
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    }
   },
   "keywords": [
     "gtm",
@@ -28,15 +40,10 @@
   },
   "bugs": "https://github.com/gtm-support/core/issues",
   "license": "MIT",
-  "files": [
-    "lib",
-    "src",
-    "tsconfig.json"
-  ],
   "devDependencies": {
-    "@types/node": "~18.7.21",
-    "@typescript-eslint/eslint-plugin": "~5.38.0",
-    "@typescript-eslint/parser": "~5.38.0",
+    "@types/node": "~18.8.3",
+    "@typescript-eslint/eslint-plugin": "~5.39.0",
+    "@typescript-eslint/parser": "~5.39.0",
     "eslint": "~8.24.0",
     "eslint-config-prettier": "~8.5.0",
     "eslint-define-config": "~1.7.0",
@@ -44,11 +51,14 @@
     "eslint-plugin-jsdoc": "~39.3.6",
     "eslint-plugin-prettier": "~4.2.1",
     "eslint-plugin-spellcheck": "~0.0.19",
-    "jsdom": "~20.0.0",
+    "jsdom": "~20.0.1",
     "prettier": "2.7.1",
     "prettier-plugin-organize-imports": "~3.1.1",
-    "typescript": "~4.8.3",
+    "rimraf": "~3.0.2",
+    "typescript": "~4.8.4",
+    "vite": "~3.1.6",
+    "vite-plugin-dts": "~1.6.5",
     "vitest": "~0.23.4"
   },
-  "packageManager": "pnpm@7.12.2"
+  "packageManager": "pnpm@7.13.2"
 }
