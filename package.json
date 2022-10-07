@@ -41,6 +41,7 @@
   "bugs": "https://github.com/gtm-support/core/issues",
   "license": "MIT",
   "devDependencies": {
+    "@release-it/keep-a-changelog": "~3.1.0",
     "@types/node": "~18.8.3",
     "@typescript-eslint/eslint-plugin": "~5.39.0",
     "@typescript-eslint/parser": "~5.39.0",
