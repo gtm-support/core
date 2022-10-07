@@ -8,6 +8,9 @@
       "pnpm run build"
     ]
   },
+  "plugins": {
+    "@release-it/keep-a-changelog": {}
+  },
   "git": {
     "commitMessage": "v${version}"
   }
