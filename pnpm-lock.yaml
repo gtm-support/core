@@ -2974,7 +2974,7 @@ packages:
       got: 12.5.1
       registry-auth-token: 5.0.1
       registry-url: 6.0.1
-      semver: 7.3.8
+      semver: 7.3.7
     dev: true
 
   /parent-module/1.0.1:
@@ -3402,7 +3402,7 @@ packages:
     resolution: {integrity: sha512-0Ju4+6A8iOnpL/Thra7dZsSlOHYAHIeMxfhWQRI1/VLcT3WDBZKKtQt/QkBOsiIN9ZpuvHE6cGZ0x4glCMmfiA==}
     engines: {node: '>=12'}
     dependencies:
-      semver: 7.3.8
+      semver: 7.3.7
     dev: true
 
   /semver/7.3.7:
@@ -3827,7 +3827,7 @@ packages:
       is-yarn-global: 0.4.0
       latest-version: 7.0.0
       pupa: 3.1.0
-      semver: 7.3.8
+      semver: 7.3.7
       semver-diff: 4.0.0
       xdg-basedir: 5.1.0
     dev: true

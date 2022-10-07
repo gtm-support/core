@@ -8,7 +8,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "vitest",
-    "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build"
+    "release": "release-it"
   },
   "type": "module",
   "files": [
