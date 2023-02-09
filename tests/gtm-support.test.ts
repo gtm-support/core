@@ -154,7 +154,7 @@ describe('gtm-support', () => {
       const scriptElement: HTMLScriptElement = instance.scriptElements[0];
 
       expect(scriptElement.src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
       );
 
       // https://github.com/gtm-support/core/issues/186
@@ -178,10 +178,10 @@ describe('gtm-support', () => {
 
       expect(instance.scriptElements).toHaveLength(2);
       expect(instance.scriptElements[0].src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO1',
+        'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO1',
       );
       expect(instance.scriptElements[1].src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO2',
+        'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO2',
       );
     });
   });

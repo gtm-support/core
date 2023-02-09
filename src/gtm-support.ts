@@ -90,7 +90,7 @@ export class GtmSupport {
    * - the `loadScript` option is set to `true`
    *
    * @param enabled `true` to enable, `false` to disable. Default: `true`.
-   * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
+   * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtag/js?'.
    */
   public enable(enabled: boolean = true, source?: string): void {
     this.options.enabled = enabled;

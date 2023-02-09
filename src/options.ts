@@ -57,7 +57,7 @@ export interface GtmSupportOptions {
   /**
    * The URL of the script; useful for server-side GTM.
    *
-   * @default https://www.googletagmanager.com/gtm.js
+   * @default https://www.googletagmanager.com/gtag/js?
    */
   source?: string;
   /**

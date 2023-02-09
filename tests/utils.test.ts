@@ -56,7 +56,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
         async: true,
         defer: false,
         nonce: '',
@@ -75,7 +75,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
         async: true,
         defer: true,
         nonce: '',
@@ -94,7 +94,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
         async: false,
         defer: true,
         nonce: '',
@@ -113,7 +113,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
         async: false,
         defer: true,
         nonce: '',
@@ -136,7 +136,7 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO',
           async: true,
           defer: false,
           nonce: 'test',
@@ -164,7 +164,7 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
+          src: 'https://www.googletagmanager.com/gtag/js??id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
           async: true,
           defer: false,
           nonce: '',
@@ -271,7 +271,7 @@ describe('utils', () => {
 
     test('true', () => {
       const script: HTMLScriptElement = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtm.js';
+      script.src = 'https://www.googletagmanager.com/gtag/js?';
       document.body.appendChild(script);
 
       expect(hasScript()).toBe(true);
@@ -303,7 +303,7 @@ describe('utils', () => {
       document.body.appendChild(wrongScript);
 
       const script: HTMLScriptElement = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtm.js';
+      script.src = 'https://www.googletagmanager.com/gtag/js?';
       document.body.appendChild(script);
 
       expect(hasScript()).toBe(true);

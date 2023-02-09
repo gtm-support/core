@@ -45,7 +45,7 @@ export interface LoadScriptOptions {
   /**
    * The URL of the script; useful for server-side GTM.
    *
-   * @default https://www.googletagmanager.com/gtm.js
+   * @default https://www.googletagmanager.com/gtag/js?
    */
   source?: string;
   /**
@@ -102,7 +102,7 @@ export function loadScript(
   });
 
   const source: string =
-    config.source ?? 'https://www.googletagmanager.com/gtm.js';
+    config.source ?? 'https://www.googletagmanager.com/gtag/js?';
 
   script.src = `${source}?${queryString}`;
 
@@ -120,11 +120,11 @@ export function loadScript(
 /**
  * Check if GTM script is in the document.
  *
- * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
- * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtm.js'` (or `source` if specified), otherwise `false`.
+ * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtag/js?'.
+ * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtag/js?'` (or `source` if specified), otherwise `false`.
  */
 export function hasScript(
-  source: string = 'https://www.googletagmanager.com/gtm.js',
+  source: string = 'https://www.googletagmanager.com/gtag/js?',
 ): boolean {
   return Array.from(document.getElementsByTagName('script')).some((script) =>
     script.src.includes(source),
