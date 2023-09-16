@@ -33,7 +33,7 @@ export interface LoadScriptOptions {
   /**
    * Will add specified MIME type to script tag.
    */
-  type?: string;
+  scriptType?: string;
   /**
    * Will add `nonce` to the script tag.
    *
@@ -100,8 +100,8 @@ export function loadScript(
     script.nonce = config.nonce;
   }
 
-  if (config.type) {
-    script.type = config.type
+  if (config.scriptType) {
+    script.type = config.scriptType
   }
 
   const queryString: URLSearchParams = new URLSearchParams({
