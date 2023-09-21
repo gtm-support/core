@@ -101,7 +101,7 @@ export function loadScript(
   }
 
   if (config.scriptType) {
-    script.type = config.scriptType
+    script.type = config.scriptType;
   }
 
   const queryString: URLSearchParams = new URLSearchParams({
