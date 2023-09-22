@@ -31,6 +31,10 @@ export interface LoadScriptOptions {
    */
   compatibility: boolean;
   /**
+   * Will add specified MIME type to script tag.
+   */
+  scriptType?: string;
+  /**
    * Will add `nonce` to the script tag.
    *
    * @see [Using Google Tag Manager with a Content Security Policy](https://developers.google.com/tag-manager/web/csp)
@@ -94,6 +98,10 @@ export function loadScript(
 
   if (config.nonce) {
     script.nonce = config.nonce;
+  }
+
+  if (config.scriptType) {
+    script.type = config.scriptType;
   }
 
   const queryString: URLSearchParams = new URLSearchParams({

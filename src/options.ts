@@ -49,6 +49,10 @@ export interface GtmSupportOptions {
    */
   compatibility?: boolean;
   /**
+   * Will add specified MIME type to script tag.
+   */
+  scriptType?: string;
+  /**
    * Will add `nonce` to the script tag.
    *
    * @see [Using Google Tag Manager with a Content Security Policy](https://developers.google.com/tag-manager/web/csp)

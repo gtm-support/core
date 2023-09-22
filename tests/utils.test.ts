@@ -21,12 +21,14 @@ describe('utils', () => {
       async: boolean;
       defer: boolean;
       nonce: string;
+      scriptType: string;
     };
     function expectScriptToBeCorrect({
       src,
       async,
       defer,
       nonce,
+      scriptType,
     }: ScriptChecks): void {
       expect(document.scripts.length).toBe(1);
 
@@ -38,6 +40,7 @@ describe('utils', () => {
       expect(script.async).toBe(async);
       expect(script.defer).toBe(defer);
       expect(script.nonce).toBe(nonce);
+      expect(script.type).toBe(scriptType);
     }
 
     afterEach(() => {
@@ -60,6 +63,7 @@ describe('utils', () => {
         async: true,
         defer: false,
         nonce: '',
+        scriptType: '',
       });
       expect(script).toBe(document.scripts.item(0));
     });
@@ -79,6 +83,7 @@ describe('utils', () => {
         async: true,
         defer: true,
         nonce: '',
+        scriptType: '',
       });
       expect(script).toBe(document.scripts.item(0));
     });
@@ -98,6 +103,7 @@ describe('utils', () => {
         async: false,
         defer: true,
         nonce: '',
+        scriptType: '',
       });
       expect(script).toBe(document.scripts.item(0));
     });
@@ -117,6 +123,7 @@ describe('utils', () => {
         async: false,
         defer: true,
         nonce: '',
+        scriptType: '',
       });
       expect(script).toBe(document.scripts.item(0));
     });
@@ -140,6 +147,36 @@ describe('utils', () => {
           async: true,
           defer: false,
           nonce: 'test',
+          scriptType: '',
+        });
+        expect(script).toBe(document.scripts.item(0));
+      },
+    );
+
+    // Test MIME type
+    test(
+      JSON.stringify({
+        compatibility: false,
+        defer: false,
+        scriptType: 'text/test',
+      }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
+
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          scriptType: 'text/test',
+        });
+
+        expectDataLayerToBeCorrect();
+        expectScriptToBeCorrect({
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          async: true,
+          defer: false,
+          nonce: '',
+          scriptType: 'text/test',
         });
         expect(script).toBe(document.scripts.item(0));
       },
@@ -168,6 +205,7 @@ describe('utils', () => {
           async: true,
           defer: false,
           nonce: '',
+          scriptType: '',
         });
         expect(script).toBe(document.scripts.item(0));
       },
@@ -223,6 +261,7 @@ describe('utils', () => {
           async: true,
           defer: false,
           nonce: '',
+          scriptType: '',
         });
         expect(script).toBe(document.scripts.item(0));
       },
