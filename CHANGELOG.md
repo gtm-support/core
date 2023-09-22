@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/2.0.0...main)
+[diff](https://github.com/gtm-support/core/compare/2.1.0...main)
+
+# 2.1.0
+
+[diff](https://github.com/gtm-support/core/compare/2.0.0...2.1.0)
+
+- Add configurable MIME type to script tag ([#350])
+
+[#350]: https://github.com/gtm-support/core/pull/350
 
 # 2.0.0
 
