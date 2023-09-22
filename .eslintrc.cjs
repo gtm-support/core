@@ -21,7 +21,7 @@ module.exports = defineConfig({
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./tsconfig.lint.json'],
+    project: ['./tsconfig.json'],
     warnOnUnsupportedTypeScriptVersion: false,
   },
   plugins: ['@typescript-eslint', 'prettier', 'jsdoc', 'spellcheck'],
@@ -62,39 +62,28 @@ module.exports = defineConfig({
       { memberVariableDeclaration: true, variableDeclaration: true },
     ],
 
-    'jsdoc/match-description': [
-      'warn',
-      {
-        mainDescription:
-          '/^[A-Z`].+?(\\.|:)(\\n\\n.*((\\n{1,2}- .+)|(_.+_)|`.+`|\\n\\n---))?\\s?$/us',
-        matchDescription: '^[A-Z`].+(\\.|`.+`)$',
-        contexts: ['any'],
-        tags: {
-          param: true,
-          returns: true,
-        },
-      },
-    ],
     'jsdoc/no-types': 'error',
-    'jsdoc/require-jsdoc': [
-      'warn',
+    'jsdoc/require-param-type': 'off',
+    'jsdoc/require-returns-type': 'off',
+    'jsdoc/require-returns': 'off',
+    'jsdoc/sort-tags': [
+      'error',
       {
-        contexts: [
-          'ClassDeclaration',
-          "ClassProperty:not([accessibility='private'])",
-          'ExportNamedDeclaration:has(VariableDeclaration)',
-          'FunctionExpression',
-          "MethodDefinition:not([accessibility='private']) > FunctionExpression",
-          'TSEnumDeclaration',
-          'TSInterfaceDeclaration',
-          'TSMethodSignature',
-          // 'TSPropertySignature',
-          'TSTypeAliasDeclaration',
+        tagSequence: [
+          { tags: ['template'] },
+          { tags: ['internal'] },
+          { tags: ['param'] },
+          { tags: ['returns'] },
+          { tags: ['throws'] },
+          { tags: ['see'] },
+          { tags: ['example'] },
+          { tags: ['since'] },
+          { tags: ['default'] },
+          { tags: ['deprecated'] },
         ],
       },
     ],
-    'jsdoc/require-param-type': 'off',
-    'jsdoc/require-returns-type': 'off',
+    'jsdoc/tag-lines': 'off',
 
     'spellcheck/spell-checker': [
       'warn',

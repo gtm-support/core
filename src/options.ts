@@ -68,6 +68,7 @@ export interface GtmSupportOptions {
    * Plugin can be disabled by setting this to `false`.
    *
    * @example enabled: !!GDPR_Cookie
+   *
    * @default true
    */
   enabled?: boolean;
@@ -85,6 +86,7 @@ export interface GtmSupportOptions {
    * The property of Track view event.
    *
    * @example trackViewEventProperty: 'track-view-event-demo'
+   *
    * @default content-view
    */
   trackViewEventProperty?: string;

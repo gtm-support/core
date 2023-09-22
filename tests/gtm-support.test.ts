@@ -151,7 +151,12 @@ describe('gtm-support', () => {
 
       expect(instance.scriptElements).toHaveLength(1);
 
-      const scriptElement: HTMLScriptElement = instance.scriptElements[0];
+      const scriptElement: HTMLScriptElement | undefined =
+        instance.scriptElements[0];
+
+      if (!scriptElement) {
+        return expect.fail();
+      }
 
       expect(scriptElement.src).toEqual(
         'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
@@ -177,10 +182,10 @@ describe('gtm-support', () => {
       instance.enable();
 
       expect(instance.scriptElements).toHaveLength(2);
-      expect(instance.scriptElements[0].src).toEqual(
+      expect(instance.scriptElements[0]!.src).toEqual(
         'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO1',
       );
-      expect(instance.scriptElements[1].src).toEqual(
+      expect(instance.scriptElements[1]!.src).toEqual(
         'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO2',
       );
     });

@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 import {
-  assertIsGtmId,
-  GtmSupport,
   GTM_ID_PATTERN,
+  GtmSupport,
+  assertIsGtmId,
   hasScript,
   loadScript,
 } from '../src/index';

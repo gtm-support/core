@@ -1,7 +1,6 @@
 import type { DataLayerObject } from './data-layer-object';
 
 declare global {
-  // eslint-disable-next-line jsdoc/require-jsdoc
   interface Window {
     /**
      * `dataLayer` used by GTM.
@@ -12,7 +11,7 @@ declare global {
   }
 }
 
-export { assertIsGtmId, GTM_ID_PATTERN } from './assert-is-gtm-id';
+export { GTM_ID_PATTERN, assertIsGtmId } from './assert-is-gtm-id';
 export type { DataLayerObject } from './data-layer-object';
 export type { GtmIdContainer, GtmQueryParams } from './gtm-container';
 export { GtmSupport } from './gtm-support';

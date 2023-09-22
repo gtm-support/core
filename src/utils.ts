@@ -65,6 +65,7 @@ export interface LoadScriptOptions {
  *
  * @param id GTM ID.
  * @param config The config object.
+ *
  * @returns The script element.
  */
 export function loadScript(
@@ -93,7 +94,6 @@ export function loadScript(
   }
 
   script.async = !config.defer;
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   script.defer = Boolean(config.defer || config.compatibility);
 
   if (config.nonce) {
@@ -129,6 +129,7 @@ export function loadScript(
  * Check if GTM script is in the document.
  *
  * @param source The URL of the script, if it differs from the default. Default: 'https://www.googletagmanager.com/gtm.js'.
+ *
  * @returns `true` if in the `document` is a `script` with `src` containing `'https://www.googletagmanager.com/gtm.js'` (or `source` if specified), otherwise `false`.
  */
 export function hasScript(
