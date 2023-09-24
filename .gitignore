@@ -1,5 +1,6 @@
 .DS_Store
 .eslintcache
+.pnpm-store
 node_modules
 lib
 coverage
