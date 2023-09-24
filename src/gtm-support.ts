@@ -159,7 +159,7 @@ export class GtmSupport {
   /**
    * Track a view event with `event: "content-view"`.
    *
-   * The event will only be send if the script runs in browser context and the if plugin is enabled.
+   * The event will only be send if the script runs in browser context and the plugin is enabled.
    *
    * If debug mode is enabled, a "Dispatching TrackView" is logged,
    * regardless of whether the plugin is enabled or the plugin is being executed in browser context.
@@ -197,7 +197,7 @@ export class GtmSupport {
   /**
    * Track an event.
    *
-   * The event will only be send if the script runs in browser context and the if plugin is enabled.
+   * The event will only be send if the script runs in browser context and the plugin is enabled.
    *
    * If debug mode is enabled, a "Dispatching event" is logged,
    * regardless of whether the plugin is enabled or the plugin is being executed in browser context.
@@ -247,6 +247,33 @@ export class GtmSupport {
         'interaction-type': noninteraction,
         ...rest,
       });
+    }
+  }
+
+  /**
+   * Track an event by pushing the custom data directly to the `window.dataLayer`.
+   *
+   * The event will only be send if the script runs in browser context and the plugin is enabled.
+   *
+   * If debug mode is enabled, a "Dispatching event" is logged,
+   * regardless of whether the plugin is enabled or the plugin is being executed in browser context.
+   *
+   * @param data Event data object that is pushed to the `window.dataLayer`.
+   */
+  public push(data: DataLayerObject): void {
+    const trigger: boolean =
+      this.isInBrowserContext() && (this.options.enabled ?? false);
+    if (this.options.debug) {
+      console.log(
+        `[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching event`,
+        data,
+      );
+    }
+
+    if (trigger) {
+      const dataLayer: DataLayerObject[] = (window.dataLayer =
+        window.dataLayer ?? []);
+      dataLayer.push(data);
     }
   }
 }
