@@ -55,6 +55,7 @@ describe('gtm-support', () => {
     expect(instance.debugEnabled).toBeInstanceOf(Function);
 
     expect(instance.dataLayer).toBeInstanceOf(Function);
+    expect(instance.push).toBeInstanceOf(Function);
 
     expect(instance.trackView).toBeInstanceOf(Function);
     expect(instance.trackEvent).toBeInstanceOf(Function);
@@ -129,6 +130,23 @@ describe('gtm-support', () => {
             value: null,
           }),
         ]),
+      );
+    });
+
+    test('should expose push function', () => {
+      const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+
+      expect(instance.push).toBeInstanceOf(Function);
+
+      const data: Record<string, any> = {
+        event: 'Test event',
+        customProp: true,
+      };
+
+      instance.push(data);
+
+      expect(window.dataLayer).toEqual(
+        expect.arrayContaining([expect.objectContaining(data)]),
       );
     });
   });
