@@ -221,6 +221,13 @@ export class GtmSupport {
   }: TrackEventOptions = {}): void {
     const trigger: boolean =
       this.isInBrowserContext() && (this.options.enabled ?? false);
+    const categoryKey: string = this.options.preserveKeys?.category
+      ? 'category'
+      : 'target';
+    const labelKey: string = this.options.preserveKeys?.label
+      ? 'label'
+      : 'target-properties';
+
     if (this.options.debug) {
       console.log(
         `[GTM-Support${trigger ? '' : '(disabled)'}]: Dispatching event`,
@@ -240,9 +247,9 @@ export class GtmSupport {
         window.dataLayer ?? []);
       dataLayer.push({
         event: event ?? 'interaction',
-        target: category,
+        [categoryKey]: category,
         action: action,
-        'target-properties': label,
+        [labelKey]: label,
         value: value,
         'interaction-type': noninteraction,
         ...rest,

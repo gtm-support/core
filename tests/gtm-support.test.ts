@@ -149,6 +149,54 @@ describe('gtm-support', () => {
         expect.arrayContaining([expect.objectContaining(data)]),
       );
     });
+
+    test('should preserve trackEvent category property', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        preserveKeys: { category: true },
+      });
+
+      expect(instance.trackEvent).toBeInstanceOf(Function);
+
+      instance.trackEvent();
+
+      expect(window.dataLayer).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            action: null,
+            category: null,
+            event: 'interaction',
+            'interaction-type': false,
+            'target-properties': null,
+            value: null,
+          }),
+        ]),
+      );
+    });
+
+    test('should preserve trackEvent label property', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        preserveKeys: { label: true },
+      });
+
+      expect(instance.trackEvent).toBeInstanceOf(Function);
+
+      instance.trackEvent();
+
+      expect(window.dataLayer).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            action: null,
+            event: 'interaction',
+            'interaction-type': false,
+            label: null,
+            target: null,
+            value: null,
+          }),
+        ]),
+      );
+    });
   });
 
   describe('update script', () => {

@@ -90,4 +90,13 @@ export interface GtmSupportOptions {
    * @default content-view
    */
   trackViewEventProperty?: string;
+  /**
+   * DataLayer category and label keys can be preserved
+   *
+   * @example preserveKeys: { category: true, label: true}
+   */
+  preserveKeys?: {
+    category?: boolean;
+    label?: boolean;
+  };
 }
