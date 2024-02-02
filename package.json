@@ -8,7 +8,7 @@
     "format": "prettier --cache --write .",
     "lint": "eslint --cache --cache-strategy content --report-unused-disable-directives .",
     "ts-check": "tsc",
-    "test": "vitest",
+    "test": "vitest --silent=false",
     "coverage": "vitest run --coverage",
     "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build",
     "preflight": "pnpm install && run-s format lint ts-check build test"
@@ -62,7 +62,7 @@
     "rimraf": "~5.0.1",
     "tsup": "~7.2.0",
     "typescript": "~5.2.2",
-    "vitest": "~0.34.5"
+    "vitest": "^0.34.6"
   },
   "packageManager": "pnpm@8.7.6"
 }

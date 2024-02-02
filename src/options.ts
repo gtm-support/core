@@ -90,4 +90,12 @@ export interface GtmSupportOptions {
    * @default content-view
    */
   trackViewEventProperty?: string;
+  /**
+   * The name of the dataLayer variable to push events.
+   *
+   * @example dataLayerName: 'dataLayerDemo'
+   *
+   * @default dataLayer
+   */
+  dataLayerName?: string;
 }

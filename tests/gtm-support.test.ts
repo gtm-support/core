@@ -12,6 +12,7 @@ describe('gtm-support', () => {
         loadScript: true,
         defer: false,
         compatibility: false,
+        dataLayerName: 'dataLayer',
       });
     });
 
@@ -32,6 +33,17 @@ describe('gtm-support', () => {
         id: [{ id: 'GTM-DEMO1' }, { id: 'GTM-DEMO2' }],
       });
       expect(instance.id).toEqual([{ id: 'GTM-DEMO1' }, { id: 'GTM-DEMO2' }]);
+    });
+
+    test('should apply dataLayerName when passed as string', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        dataLayerName: 'dataLayerDemo',
+      });
+
+      expect(instance.options.dataLayerName).toEqual('dataLayerDemo');
+      expect(instance.dataLayer()).toBeInstanceOf(Array);
+      expect(window.dataLayerDemo).toBeInstanceOf(Array);
     });
   });
 
@@ -68,19 +80,22 @@ describe('gtm-support', () => {
   });
 
   describe('tracking', () => {
+    let dataLayerName: string | undefined;
+
     afterEach(() => {
       resetHtml();
-      resetDataLayer();
+      resetDataLayer(dataLayerName);
     });
 
     test('should expose trackView function', () => {
       const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+      dataLayerName = instance.options.dataLayerName;
 
       expect(instance.trackView).toBeInstanceOf(Function);
 
       instance.trackView('ScreenName', 'Path');
 
-      expect(window.dataLayer).toEqual(
+      expect(instance.dataLayer()).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             'content-name': 'Path',
@@ -96,12 +111,13 @@ describe('gtm-support', () => {
         id: 'GTM-DEMO',
         trackViewEventProperty: 'track-view-event-demo',
       });
+      dataLayerName = instance.options.dataLayerName;
 
       expect(instance.trackView).toBeInstanceOf(Function);
 
       instance.trackView('ScreenName', 'Path');
 
-      expect(window.dataLayer).toEqual(
+      expect(instance.dataLayer()).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             'content-name': 'Path',
@@ -114,12 +130,13 @@ describe('gtm-support', () => {
 
     test('should expose trackEvent function', () => {
       const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+      dataLayerName = instance.options.dataLayerName;
 
       expect(instance.trackEvent).toBeInstanceOf(Function);
 
       instance.trackEvent();
 
-      expect(window.dataLayer).toEqual(
+      expect(instance.dataLayer()).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             action: null,
@@ -135,6 +152,7 @@ describe('gtm-support', () => {
 
     test('should expose push function', () => {
       const instance: GtmSupport = new GtmSupport({ id: 'GTM-DEMO' });
+      dataLayerName = instance.options.dataLayerName;
 
       expect(instance.push).toBeInstanceOf(Function);
 
@@ -145,16 +163,38 @@ describe('gtm-support', () => {
 
       instance.push(data);
 
-      expect(window.dataLayer).toEqual(
+      expect(instance.dataLayer()).toEqual(
+        expect.arrayContaining([expect.objectContaining(data)]),
+      );
+    });
+
+    test('should use changed dataLayerName', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        dataLayerName: 'dataLayerDemo',
+      });
+      dataLayerName = instance.options.dataLayerName;
+
+      expect(instance.push).toBeInstanceOf(Function);
+
+      const data: Record<string, any> = {
+        event: 'Test event',
+        customProp: true,
+      };
+
+      instance.push(data);
+
+      expect(window.dataLayerDemo).toEqual(
         expect.arrayContaining([expect.objectContaining(data)]),
       );
     });
   });
 
   describe('update script', () => {
+    let dataLayerName: string | undefined;
     afterEach(() => {
       resetHtml();
-      resetDataLayer();
+      resetDataLayer(dataLayerName);
     });
 
     test('should update script', () => {
@@ -162,6 +202,7 @@ describe('gtm-support', () => {
         id: 'GTM-DEMO',
         loadScript: true,
       });
+      dataLayerName = instance.options.dataLayerName;
 
       expect(instance.scriptElements).toEqual([]);
 
@@ -177,7 +218,44 @@ describe('gtm-support', () => {
       }
 
       expect(scriptElement.src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
+      );
+
+      // https://github.com/gtm-support/core/issues/186
+      expect(scriptElement.getAttributeNode('data-ot-ignore')).toBeNull();
+      scriptElement.setAttributeNode(
+        document.createAttribute('data-ot-ignore'),
+      );
+      expect(scriptElement.getAttributeNode('data-ot-ignore')).toBeDefined();
+
+      expect(scriptElement.getAttribute('class')).toBeNull();
+      scriptElement.setAttribute('class', 'category-C0001');
+      expect(scriptElement.getAttribute('class')).toBe('category-C0001');
+    });
+
+    test('should load script with non default dataLayer', () => {
+      const instance: GtmSupport = new GtmSupport({
+        id: 'GTM-DEMO',
+        loadScript: true,
+        dataLayerName: 'dataLayerDemo',
+      });
+      dataLayerName = instance.options.dataLayerName;
+
+      expect(instance.scriptElements).toEqual([]);
+
+      instance.enable();
+
+      expect(instance.scriptElements).toHaveLength(1);
+
+      const scriptElement: HTMLScriptElement | undefined =
+        instance.scriptElements[0];
+
+      if (!scriptElement) {
+        return expect.fail();
+      }
+
+      expect(scriptElement.src).toEqual(
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayerDemo',
       );
 
       // https://github.com/gtm-support/core/issues/186
@@ -196,15 +274,16 @@ describe('gtm-support', () => {
       const instance: GtmSupport = new GtmSupport({
         id: ['GTM-DEMO1', 'GTM-DEMO2'],
       });
+      dataLayerName = instance.options.dataLayerName;
 
       instance.enable();
 
       expect(instance.scriptElements).toHaveLength(2);
       expect(instance.scriptElements[0]!.src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO1',
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO1&l=dataLayer',
       );
       expect(instance.scriptElements[1]!.src).toEqual(
-        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO2',
+        'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO2&l=dataLayer',
       );
     });
   });

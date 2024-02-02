@@ -3,10 +3,12 @@ import { hasScript, loadScript } from '../src/index';
 import { resetDataLayer, resetHtml } from './test-utils';
 
 describe('utils', () => {
+  let dataLayerName: string | undefined;
+
   describe('loadScript', () => {
-    function expectDataLayerToBeCorrect(): void {
-      expect(window.dataLayer).toBeDefined();
-      expect(window.dataLayer).toEqual(
+    function expectDataLayerToBeCorrect(dataLayerName = 'dataLayer'): void {
+      expect(window[dataLayerName]).toBeDefined();
+      expect(window[dataLayerName]).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             event: 'gtm.js',
@@ -45,7 +47,7 @@ describe('utils', () => {
 
     afterEach(() => {
       resetHtml();
-      resetDataLayer();
+      resetDataLayer(dataLayerName);
     });
 
     test(JSON.stringify({ compatibility: false, defer: false }), () => {
@@ -59,7 +61,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
         async: true,
         defer: false,
         nonce: '',
@@ -79,7 +81,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
         async: true,
         defer: true,
         nonce: '',
@@ -99,7 +101,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
         async: false,
         defer: true,
         nonce: '',
@@ -119,7 +121,7 @@ describe('utils', () => {
 
       expectDataLayerToBeCorrect();
       expectScriptToBeCorrect({
-        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+        src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
         async: false,
         defer: true,
         nonce: '',
@@ -143,7 +145,37 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
+          async: true,
+          defer: false,
+          nonce: 'test',
+          scriptType: '',
+        });
+        expect(script).toBe(document.scripts.item(0));
+      },
+    );
+
+    // Test different dataLayer name
+    test(
+      JSON.stringify({
+        compatibility: false,
+        defer: false,
+        dataLayerName: 'dataLayerDemo',
+      }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
+
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          nonce: 'test',
+          dataLayerName: 'dataLayerDemo',
+        });
+
+        expectDataLayerToBeCorrect('dataLayerDemo');
+        expectScriptToBeCorrect({
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayerDemo',
           async: true,
           defer: false,
           nonce: 'test',
@@ -172,7 +204,7 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer',
           async: true,
           defer: false,
           nonce: '',
@@ -201,7 +233,7 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayer&gtm_auth=auth&gtm_preview=preview&gtm_cookies_win=cookies_win',
           async: true,
           defer: false,
           nonce: '',
@@ -257,7 +289,7 @@ describe('utils', () => {
 
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
-          src: 'https://analytics.example.com/gtm.js?id=GTM-DEMO',
+          src: 'https://analytics.example.com/gtm.js?id=GTM-DEMO&l=dataLayer',
           async: true,
           defer: false,
           nonce: '',

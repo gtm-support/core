@@ -54,6 +54,7 @@ export class GtmSupport {
       loadScript: true,
       defer: false,
       compatibility: false,
+      dataLayerName: 'dataLayer',
       ...options,
     };
 
@@ -144,14 +145,18 @@ export class GtmSupport {
   }
 
   /**
-   * Returns the `window.dataLayer` array if the script is running in browser context and the plugin is enabled,
+   * Returns the `window[pluginOptions[dataLayerName]]` array if the script is running in browser context and the plugin is enabled,
    * otherwise `false`.
    *
-   * @returns The `window.dataLayer` if script is running in browser context and plugin is enabled, otherwise `false`.
+   * @returns The `window[pluginOptions[dataLayerName]]` if script is running in browser context and plugin is enabled, otherwise `false`.
    */
   public dataLayer(): DataLayerObject[] | false {
     if (this.isInBrowserContext() && this.options.enabled) {
-      return (window.dataLayer = window.dataLayer ?? []);
+      const dataLayerName: keyof Window =
+        this.options.dataLayerName ?? 'dataLayer';
+      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
+        window[dataLayerName] ?? []);
+      return dataLayer;
     }
     return false;
   }
@@ -183,8 +188,10 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayer: DataLayerObject[] = (window.dataLayer =
-        window.dataLayer ?? []);
+      const dataLayerName: keyof Window =
+        this.options.dataLayerName ?? 'dataLayer';
+      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
+        window[dataLayerName] ?? []);
       dataLayer.push({
         ...additionalEventData,
         event: this.options.trackViewEventProperty ?? 'content-view',
@@ -203,7 +210,7 @@ export class GtmSupport {
    * regardless of whether the plugin is enabled or the plugin is being executed in browser context.
    *
    * @param param0 Object that will be used for configuring the event object passed to GTM.
-   * @param param0.event `event`, default to `"interaction"` when pushed to `window.dataLayer`.
+   * @param param0.event `event`, default to `"interaction"` when pushed to `dataLayer`.
    * @param param0.category Optional `category`, passed as `target`.
    * @param param0.action Optional `action`, passed as `action`.
    * @param param0.label Optional `label`, passed as `"target-properties"`.
@@ -236,8 +243,10 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayer: DataLayerObject[] = (window.dataLayer =
-        window.dataLayer ?? []);
+      const dataLayerName: keyof Window =
+        this.options.dataLayerName ?? 'dataLayer';
+      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
+        window[dataLayerName] ?? []);
       dataLayer.push({
         event: event ?? 'interaction',
         target: category,
@@ -251,14 +260,14 @@ export class GtmSupport {
   }
 
   /**
-   * Track an event by pushing the custom data directly to the `window.dataLayer`.
+   * Track an event by pushing the custom data directly to the `dataLayer`.
    *
-   * The event will only be send if the script runs in browser context and the plugin is enabled.
+   * The event will only be send if the script runs in browser context, dataLayer exists, and the plugin is enabled.
    *
    * If debug mode is enabled, a "Dispatching event" is logged,
    * regardless of whether the plugin is enabled or the plugin is being executed in browser context.
    *
-   * @param data Event data object that is pushed to the `window.dataLayer`.
+   * @param data Event data object that is pushed to the `dataLayer`.
    */
   public push(data: DataLayerObject): void {
     const trigger: boolean =
@@ -271,8 +280,10 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayer: DataLayerObject[] = (window.dataLayer =
-        window.dataLayer ?? []);
+      const dataLayerName: keyof Window =
+        this.options.dataLayerName ?? 'dataLayer';
+      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
+        window[dataLayerName] ?? []);
       dataLayer.push(data);
     }
   }

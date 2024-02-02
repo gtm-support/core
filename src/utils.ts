@@ -58,6 +58,12 @@ export interface LoadScriptOptions {
    * @param options Object containing container `id` and `script` element.
    */
   onReady?: (options: OnReadyOptions) => void;
+  /**
+   * The GTM dataLayer name.
+   *
+   * @default 'dataLayer'
+   */
+  dataLayerName?: string;
 }
 
 /**
@@ -82,9 +88,10 @@ export function loadScript(
 
   script.addEventListener('load', scriptLoadListener);
 
-  window.dataLayer = window.dataLayer ?? [];
+  const dataLayerName: string = config.dataLayerName ?? 'dataLayer';
+  window[dataLayerName] = window[dataLayerName] ?? [];
 
-  window.dataLayer?.push({
+  window[dataLayerName]?.push({
     event: 'gtm.js',
     'gtm.start': new Date().getTime(),
   });
@@ -106,6 +113,7 @@ export function loadScript(
 
   const queryString: URLSearchParams = new URLSearchParams({
     id,
+    l: config.dataLayerName ?? 'dataLayer',
     ...(config.queryParams ?? {}),
   });
 
