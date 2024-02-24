@@ -61,6 +61,8 @@ export interface LoadScriptOptions {
   /**
    * The GTM dataLayer name.
    *
+   * @see https://developers.google.com/tag-platform/tag-manager/datalayer#rename_the_data_layer
+   *
    * @default 'dataLayer'
    */
   dataLayerName?: string;

@@ -1,5 +1,5 @@
 /**
- * Object within the `window[pluginOptions[dataLayerName]]`.
+ * Object within the `window.dataLayer`.
  *
  * @see [developers.google.com/tag-manager/devguide](https://developers.google.com/tag-manager/devguide)
  */

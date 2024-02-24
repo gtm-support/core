@@ -145,10 +145,10 @@ export class GtmSupport {
   }
 
   /**
-   * Returns the `window[pluginOptions[dataLayerName]]` array if the script is running in browser context and the plugin is enabled,
+   * Returns the `window[dataLayerName]` array if the script is running in browser context and the plugin is enabled,
    * otherwise `false`.
    *
-   * @returns The `window[pluginOptions[dataLayerName]]` if script is running in browser context and plugin is enabled, otherwise `false`.
+   * @returns The `window[dataLayerName]` if script is running in browser context and plugin is enabled, otherwise `false`.
    */
   public dataLayer(): DataLayerObject[] | false {
     if (this.isInBrowserContext() && this.options.enabled) {
