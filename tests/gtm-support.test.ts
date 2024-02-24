@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test } from 'vitest';
+import type { DataLayerObject } from '../src/index';
 import { GtmSupport } from '../src/index';
 import { resetDataLayer, resetHtml } from './test-utils';
 
@@ -41,9 +42,12 @@ describe('gtm-support', () => {
         dataLayerName: 'dataLayerDemo',
       });
 
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
       expect(instance.options.dataLayerName).toEqual('dataLayerDemo');
       expect(instance.dataLayer()).toBeInstanceOf(Array);
-      expect(window.dataLayerDemo).toBeInstanceOf(Array);
+      expect(dataLayer).toBeInstanceOf(Array);
     });
   });
 
@@ -95,7 +99,10 @@ describe('gtm-support', () => {
 
       instance.trackView('ScreenName', 'Path');
 
-      expect(instance.dataLayer()).toEqual(
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
+      expect(dataLayer).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             'content-name': 'Path',
@@ -117,7 +124,10 @@ describe('gtm-support', () => {
 
       instance.trackView('ScreenName', 'Path');
 
-      expect(instance.dataLayer()).toEqual(
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
+      expect(dataLayer).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             'content-name': 'Path',
@@ -136,7 +146,10 @@ describe('gtm-support', () => {
 
       instance.trackEvent();
 
-      expect(instance.dataLayer()).toEqual(
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
+      expect(dataLayer).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             action: null,
@@ -163,7 +176,10 @@ describe('gtm-support', () => {
 
       instance.push(data);
 
-      expect(instance.dataLayer()).toEqual(
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
+      expect(dataLayer).toEqual(
         expect.arrayContaining([expect.objectContaining(data)]),
       );
     });
@@ -184,7 +200,10 @@ describe('gtm-support', () => {
 
       instance.push(data);
 
-      expect(window.dataLayerDemo).toEqual(
+      const dataLayer: false | DataLayerObject[] = instance.dataLayer();
+
+      expect(dataLayer).toBeInstanceOf(Array);
+      expect(dataLayer).toEqual(
         expect.arrayContaining([expect.objectContaining(data)]),
       );
     });

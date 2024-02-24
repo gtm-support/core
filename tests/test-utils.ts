@@ -1,3 +1,5 @@
+import type { DynamicDataLayerWindow } from '../src/utils';
+
 export function resetHtml(): void {
   const html: HTMLHtmlElement = document.getElementsByTagName(
     'html',
@@ -6,5 +8,5 @@ export function resetHtml(): void {
 }
 
 export function resetDataLayer(dataLayerName = 'dataLayer'): void {
-  delete window[dataLayerName];
+  delete (window as DynamicDataLayerWindow)[dataLayerName];
 }

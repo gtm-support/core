@@ -2,8 +2,8 @@ import { assertIsGtmId } from './assert-is-gtm-id';
 import type { DataLayerObject } from './data-layer-object';
 import type { GtmIdContainer } from './gtm-container';
 import type { GtmSupportOptions } from './options';
-import type { LoadScriptOptions } from './utils';
-import { hasScript, loadScript } from './utils';
+import type { DynamicDataLayerWindow, LoadScriptOptions } from './utils';
+import { getOrInitializeDataLayer, hasScript, loadScript } from './utils';
 
 /**
  * Object definition for a track event.
@@ -152,10 +152,14 @@ export class GtmSupport {
    */
   public dataLayer(): DataLayerObject[] | false {
     if (this.isInBrowserContext() && this.options.enabled) {
-      const dataLayerName: keyof Window =
+      const dataLayerName: keyof DynamicDataLayerWindow =
         this.options.dataLayerName ?? 'dataLayer';
-      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
-        window[dataLayerName] ?? []);
+
+      const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
+        window,
+        dataLayerName,
+      );
+
       return dataLayer;
     }
     return false;
@@ -188,10 +192,14 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof Window =
+      const dataLayerName: keyof DynamicDataLayerWindow =
         this.options.dataLayerName ?? 'dataLayer';
-      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
-        window[dataLayerName] ?? []);
+
+      const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
+        window,
+        dataLayerName,
+      );
+
       dataLayer.push({
         ...additionalEventData,
         event: this.options.trackViewEventProperty ?? 'content-view',
@@ -243,10 +251,14 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof Window =
+      const dataLayerName: keyof DynamicDataLayerWindow =
         this.options.dataLayerName ?? 'dataLayer';
-      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
-        window[dataLayerName] ?? []);
+
+      const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
+        window,
+        dataLayerName,
+      );
+
       dataLayer.push({
         event: event ?? 'interaction',
         target: category,
@@ -280,10 +292,14 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof Window =
+      const dataLayerName: keyof DynamicDataLayerWindow =
         this.options.dataLayerName ?? 'dataLayer';
-      const dataLayer: DataLayerObject[] = (window[dataLayerName] =
-        window[dataLayerName] ?? []);
+
+      const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
+        window,
+        dataLayerName,
+      );
+
       dataLayer.push(data);
     }
   }
