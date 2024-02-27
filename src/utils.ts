@@ -79,6 +79,7 @@ export interface DynamicDataLayerWindow extends Window {
 
 /**
  * Ensure that the dataLayer is defined.
+ *
  * @param window The window object.
  * @param key The dataLayer name.
  *

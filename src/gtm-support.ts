@@ -2,7 +2,7 @@ import { assertIsGtmId } from './assert-is-gtm-id';
 import type { DataLayerObject } from './data-layer-object';
 import type { GtmIdContainer } from './gtm-container';
 import type { GtmSupportOptions } from './options';
-import type { DynamicDataLayerWindow, LoadScriptOptions } from './utils';
+import type { LoadScriptOptions } from './utils';
 import { getOrInitializeDataLayer, hasScript, loadScript } from './utils';
 
 /**
@@ -152,12 +152,9 @@ export class GtmSupport {
    */
   public dataLayer(): DataLayerObject[] | false {
     if (this.isInBrowserContext() && this.options.enabled) {
-      const dataLayerName: keyof DynamicDataLayerWindow =
-        this.options.dataLayerName ?? 'dataLayer';
-
       const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
         window,
-        dataLayerName,
+        this.options.dataLayerName,
       );
 
       return dataLayer;
@@ -192,12 +189,9 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof DynamicDataLayerWindow =
-        this.options.dataLayerName ?? 'dataLayer';
-
       const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
         window,
-        dataLayerName,
+        this.options.dataLayerName,
       );
 
       dataLayer.push({
@@ -251,12 +245,9 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof DynamicDataLayerWindow =
-        this.options.dataLayerName ?? 'dataLayer';
-
       const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
         window,
-        dataLayerName,
+        this.options.dataLayerName,
       );
 
       dataLayer.push({
@@ -292,12 +283,9 @@ export class GtmSupport {
     }
 
     if (trigger) {
-      const dataLayerName: keyof DynamicDataLayerWindow =
-        this.options.dataLayerName ?? 'dataLayer';
-
       const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
         window,
-        dataLayerName,
+        this.options.dataLayerName,
       );
 
       dataLayer.push(data);
