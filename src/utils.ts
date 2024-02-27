@@ -1,4 +1,6 @@
+import type { DataLayerObject } from './data-layer-object';
 import type { GtmQueryParams } from './gtm-container';
+import type { GtmSupportOptions } from './options';
 
 /**
  *  OnReadyOptions.
@@ -58,6 +60,40 @@ export interface LoadScriptOptions {
    * @param options Object containing container `id` and `script` element.
    */
   onReady?: (options: OnReadyOptions) => void;
+  /**
+   * The GTM dataLayer name.
+   *
+   * @see https://developers.google.com/tag-platform/tag-manager/datalayer#rename_the_data_layer
+   *
+   * @default 'dataLayer'
+   */
+  dataLayerName?: string;
+}
+
+/**
+ * Extended window object to type dynamic dataLayer name.
+ */
+export interface DynamicDataLayerWindow extends Window {
+  [key: string]: any;
+}
+
+/**
+ * Ensure that the dataLayer is defined.
+ *
+ * @param window The window object.
+ * @param key The dataLayer name.
+ *
+ * @returns The dataLayer object.
+ */
+export function getOrInitializeDataLayer(
+  window: DynamicDataLayerWindow,
+  key: GtmSupportOptions['dataLayerName'] = 'dataLayer',
+): DataLayerObject[] {
+  if (!window[key]) {
+    window[key] = [];
+  }
+
+  return window[key] as DataLayerObject[];
 }
 
 /**
@@ -82,9 +118,13 @@ export function loadScript(
 
   script.addEventListener('load', scriptLoadListener);
 
-  window.dataLayer = window.dataLayer ?? [];
+  const dataLayerName: string = config.dataLayerName ?? 'dataLayer';
+  const dataLayer: DataLayerObject[] = getOrInitializeDataLayer(
+    window,
+    dataLayerName,
+  );
 
-  window.dataLayer?.push({
+  dataLayer.push({
     event: 'gtm.js',
     'gtm.start': new Date().getTime(),
   });
@@ -106,6 +146,7 @@ export function loadScript(
 
   const queryString: URLSearchParams = new URLSearchParams({
     id,
+    ...(config.dataLayerName ? { l: config.dataLayerName } : {}),
     ...(config.queryParams ?? {}),
   });
 

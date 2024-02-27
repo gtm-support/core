@@ -3,7 +3,7 @@ import type { DataLayerObject } from './data-layer-object';
 declare global {
   interface Window {
     /**
-     * `dataLayer` used by GTM.
+     * Default `dataLayer` used by GTM.
      *
      * @see [developers.google.com/tag-manager/devguide](https://developers.google.com/tag-manager/devguide)
      */

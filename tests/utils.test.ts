@@ -1,12 +1,15 @@
 import { afterEach, describe, expect, test } from 'vitest';
 import { hasScript, loadScript } from '../src/index';
+import type { DynamicDataLayerWindow } from '../src/utils';
 import { resetDataLayer, resetHtml } from './test-utils';
 
 describe('utils', () => {
+  let dataLayerName: string | undefined;
+
   describe('loadScript', () => {
-    function expectDataLayerToBeCorrect(): void {
-      expect(window.dataLayer).toBeDefined();
-      expect(window.dataLayer).toEqual(
+    function expectDataLayerToBeCorrect(dataLayerName = 'dataLayer'): void {
+      expect((window as DynamicDataLayerWindow)[dataLayerName]).toBeDefined();
+      expect((window as DynamicDataLayerWindow)[dataLayerName]).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             event: 'gtm.js',
@@ -45,7 +48,7 @@ describe('utils', () => {
 
     afterEach(() => {
       resetHtml();
-      resetDataLayer();
+      resetDataLayer(dataLayerName);
     });
 
     test(JSON.stringify({ compatibility: false, defer: false }), () => {
@@ -144,6 +147,36 @@ describe('utils', () => {
         expectDataLayerToBeCorrect();
         expectScriptToBeCorrect({
           src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO',
+          async: true,
+          defer: false,
+          nonce: 'test',
+          scriptType: '',
+        });
+        expect(script).toBe(document.scripts.item(0));
+      },
+    );
+
+    // Test different dataLayer name
+    test(
+      JSON.stringify({
+        compatibility: false,
+        defer: false,
+        dataLayerName: 'dataLayerDemo',
+      }),
+      () => {
+        expect(window.dataLayer).toBeUndefined();
+        expect(document.scripts.length).toBe(0);
+
+        const script: HTMLScriptElement = loadScript('GTM-DEMO', {
+          compatibility: false,
+          defer: false,
+          nonce: 'test',
+          dataLayerName: 'dataLayerDemo',
+        });
+
+        expectDataLayerToBeCorrect('dataLayerDemo');
+        expectScriptToBeCorrect({
+          src: 'https://www.googletagmanager.com/gtm.js?id=GTM-DEMO&l=dataLayerDemo',
           async: true,
           defer: false,
           nonce: 'test',

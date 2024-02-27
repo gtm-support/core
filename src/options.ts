@@ -90,4 +90,14 @@ export interface GtmSupportOptions {
    * @default content-view
    */
   trackViewEventProperty?: string;
+  /**
+   * The name of the dataLayer variable to push events.
+   *
+   * @see https://developers.google.com/tag-platform/tag-manager/datalayer#rename_the_data_layer
+   *
+   * @example dataLayerName: 'dataLayerDemo'
+   *
+   * @default 'dataLayer'
+   */
+  dataLayerName?: string;
 }
