@@ -42,7 +42,11 @@ describe('utils', () => {
       expect(script.src).toBe(src);
       expect(script.async).toBe(async);
       expect(script.defer).toBe(defer);
-      expect(script.nonce).toBe(nonce);
+      if (nonce !== undefined && nonce !== '') {
+        expect(script.getAttribute('nonce')).toBe(nonce);
+      } else {
+        expect(script.getAttribute('nonce')).toBe(null);
+      }
       expect(script.type).toBe(scriptType);
     }
 
