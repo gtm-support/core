@@ -137,7 +137,7 @@ export function loadScript(
   script.defer = Boolean(config.defer || config.compatibility);
 
   if (config.nonce) {
-    script.nonce = config.nonce;
+    script.setAttribute('nonce', config.nonce);
   }
 
   if (config.scriptType) {
