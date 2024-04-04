@@ -1,6 +1,14 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/2.3.0...main)
+[diff](https://github.com/gtm-support/core/compare/2.3.1...main)
+
+# 2.3.1
+
+[diff](https://github.com/gtm-support/core/compare/2.3.0...2.3.1)
+
+- Handle `nonce` as script-attribute ([#414])
+
+[#414]: https://github.com/gtm-support/core/pull/414
 
 # 2.3.0
 
