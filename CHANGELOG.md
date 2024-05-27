@@ -1,6 +1,12 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/3.0.0...main)
+[diff](https://github.com/gtm-support/core/compare/3.0.1...main)
+
+# 3.0.1
+
+[diff](https://github.com/gtm-support/core/compare/3.0.0...3.0.1)
+
+- Fix missing required export section
 
 # 3.0.0
 
