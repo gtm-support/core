@@ -1,6 +1,6 @@
 {
   "name": "@gtm-support/core",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "Core implementation for Google Tag Manager support",
   "scripts": {
     "clean": "rimraf coverage .eslintcache lib pnpm-lock.yaml node_modules",

@@ -10,7 +10,7 @@ assignees: ""
 
 | Tool    | Version       |
 | ------- | ------------- |
-| Package | v1.x.x        |
+| Package | v3.x.x        |
 | Node    | vx.x.x        |
 | OS      | win,linux,mac |
 
