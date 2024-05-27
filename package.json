@@ -19,6 +19,10 @@
   ],
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
   "keywords": [
     "gtm",
     "google-tag-manager",
