@@ -4,10 +4,9 @@ export default defineConfig({
   entry: ['src/index.ts'],
   outDir: 'lib',
   clean: true,
-  target: ['es2022', 'node18'],
+  target: ['es2022', 'node20'],
   minify: true,
   sourcemap: true,
-  splitting: false,
-  format: ['esm', 'cjs'],
+  format: 'esm',
   dts: true,
 });

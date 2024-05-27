@@ -17,15 +17,8 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.cjs",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/index.cjs"
-    }
-  },
   "keywords": [
     "gtm",
     "google-tag-manager",
