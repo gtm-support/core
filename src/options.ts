@@ -59,6 +59,12 @@ export interface GtmSupportOptions {
    */
   nonce?: string;
   /**
+   * Where to append the script element.
+   *
+   * @default document.body
+   */
+  parentElement?: HTMLElement;
+  /**
    * The URL of the script; useful for server-side GTM.
    *
    * @default https://www.googletagmanager.com/gtm.js
