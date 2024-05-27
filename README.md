@@ -1,7 +1,5 @@
 <h1 align="center">GTM Support Core</h1>
 
-<h4 align="center">*** Contributors welcome ***</h4>
-
 <p align="center">
   <a href="https://tagmanager.google.com/">
     <img alt="Google Tag Manager" src="https://www.gstatic.cn/analytics-suite/header/suite/v2/ic_tag_manager.svg" height="192">
@@ -31,13 +29,8 @@
 </p>
 
 <p align="center">
-  This is the core implementation used by other packages like <a href="https://github.com/gtm-support/vue-gtm">vue-gtm</a> and <a href="https://github.com/gtm-support/vue-gtm/tree/vue2-gtm">vue2-gtm</a>
+  This is the core implementation used by other packages like <a href="https://github.com/gtm-support/vue-gtm">vue-gtm</a>
 </p>
-
-## IE 11 support
-
-If you really need to support browsers like IE 11, you need to configure `transpileDependencies: ['@gtm-support/core']` in your `vue.config.js`.  
-See [#20 (comment)](https://github.com/gtm-support/core/issues/20#issuecomment-855903062)
 
 ## Credits
 
