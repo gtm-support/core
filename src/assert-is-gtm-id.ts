@@ -14,7 +14,9 @@ export function assertIsGtmId(id: string): asserts id {
       .toUpperCase()
       .replace(/.*-|[^0-9A-Z]/g, '');
     const suggestionText: string =
-      suggestion.length === 0 ? '' : ` Did you mean 'GTM-${suggestion}' or 'G-${suggestion}'?`;
+      suggestion.length === 0
+        ? ''
+        : ` Did you mean 'GTM-${suggestion}' or 'G-${suggestion}'?`;
     throw new Error(
       `'${id}' is not a valid GTM-ID (${GTM_ID_PATTERN}).${suggestionText}`,
     );
