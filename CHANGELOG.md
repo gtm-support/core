@@ -1,6 +1,17 @@
 # Next
 
-[diff](https://github.com/gtm-support/core/compare/2.3.1...main)
+[diff](https://github.com/gtm-support/core/compare/3.0.0...main)
+
+# 3.0.0
+
+[diff](https://github.com/gtm-support/core/compare/2.3.1...3.0.0)
+
+- Drop cjs support
+- Add `parentElement` to `GtmSupportOptions` ([#422])
+- Add support for new GTM IDs starting with `G-` ([#427])
+
+[#422]: https://github.com/gtm-support/core/pull/422
+[#427]: https://github.com/gtm-support/core/pull/427
 
 # 2.3.1
 
